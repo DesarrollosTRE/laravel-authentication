@@ -1,0 +1,22 @@
+{
+    "name": "speelpenning/laravel-authentication",
+    "description": "Authentication for B2B and B2C.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gerben Speelpenning",
+            "email": "gerben@speelpenning.nl"
+        }
+    ],
+    "require": {
+        "laravel/laravel": "5.1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Speelpenning\\Authentication\\": "src/"
+        }
+    }
+}
