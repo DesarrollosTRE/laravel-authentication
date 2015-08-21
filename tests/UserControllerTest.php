@@ -23,4 +23,32 @@ class UserControllerTest extends TestCase {
             ;
     }
 
+    public function testUsersNameIsRequired()
+    {
+        config([
+            'authentication.registration.userName' => 'required',
+        ]);
+
+        $this->visit(route('authentication::user.create'))
+            ->see(trans('authentication::user.name'))
+            ->dontSee(trans('authentication::user.optional'))
+        ;
+    }
+
+    public function testUserNameIsTurnedOff()
+    {
+        config([
+            'authentication.registration.userName' => 'off',
+        ]);
+
+        $this->visit(route('authentication::user.create'))
+            ->dontSee(trans('authentication::user.name'))
+        ;
+    }
+
+//    public function testValidationDefaultRegistrationForm()
+//    {
+//
+//    }
+
 }

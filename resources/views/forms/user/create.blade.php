@@ -2,10 +2,10 @@
 
     {!! csrf_field() !!}
 
-    @if(config('authentication.registration.name') != 'off')
+    @if(config('authentication.registration.userName') != 'off')
         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
             <label for="name" class="control-label">{{ trans('authentication::user.name') }}</label>
-            @if(config('authentication.registration.name') == 'required')
+            @if(config('authentication.registration.userName') == 'required')
                 <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" required>
             @else
                 <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control">

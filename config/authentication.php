@@ -25,7 +25,28 @@ return [
      */
     'registration' => [
 
+        /*
+         * User name
+         *
+         * By default the user's name field is shown, but not required. You can change the default behaviour to:
+         *
+         *      on          Shows the name field, but it is not required.
+         *      off         Does not show the name field.
+         *      required    Shows the name field and makes it required.
+         */
+        'userName' => env('AUTH_REGISTRATION_USERNAME', 'on'),
 
+    ],
+
+    /*
+     * Password options
+     */
+    'password' => [
+
+        /*
+         * Minimum password length (in characters)
+         */
+        'minLength' => env('AUTH_REGISTRATION_MIN_PASSWORD_LENGTH', 8),
 
     ],
 
