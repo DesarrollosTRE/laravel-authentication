@@ -36,6 +36,14 @@ return [
          */
         'userName' => env('AUTH_REGISTRATION_USERNAME', 'on'),
 
+        /*
+         * Redirect URI
+         *
+         * After a successful registration, the user is redirected to the home page. With this option, you can
+         * configure a different destination.
+         */
+        'redirectUri' => env('AUTH_REGISTRATION_REDIRECT_URI', '/'),
+
     ],
 
     /*

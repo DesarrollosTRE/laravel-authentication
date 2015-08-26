@@ -30,7 +30,7 @@ class UserController extends Controller {
     public function store(StoreUserRequest $request, Registrar $registrar)
     {
         $registrar->register($request);
-        return response('Success!');
+        return redirect($this->config->get('authentication.registration.redirectUri'));
     }
 
 }

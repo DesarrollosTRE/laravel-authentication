@@ -90,15 +90,17 @@ class UserControllerTest extends TestCase {
             ->see('The password must be at least 10 characters.');
     }
 
-    public function testSuccessfulRegistration()
+    public function testSuccessfulRegistrationAndRedirection()
     {
+        config(['authentication.registration.redirectUri' => route('authentication::user.create')]);
+
         $this->visit(route('authentication::user.create'))
             ->type('John Doe', 'name')
             ->type('john.doe@example.com', 'email')
             ->type('some-valid-password', 'password')
             ->type('some-valid-password', 'password_confirmation')
             ->press(trans('authentication::user.create'))
-            ->see('Success!');
+            ->seePageIs(route('authentication::user.create'));
     }
 
 }
