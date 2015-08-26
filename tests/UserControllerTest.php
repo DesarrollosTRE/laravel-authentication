@@ -1,6 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class UserControllerTest extends TestCase {
+
+    use DatabaseMigrations, DatabaseTransactions;
 
     public function setUp()
     {
