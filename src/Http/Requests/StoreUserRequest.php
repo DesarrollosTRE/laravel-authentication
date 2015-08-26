@@ -1,32 +1,8 @@
 <?php namespace Speelpenning\Authentication\Http\Requests;
 
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
-{
-    /**
-     * @var Guard
-     */
-    protected $auth;
-
-    /**
-     * @var Repository
-     */
-    protected $config;
-
-    /**
-     * StoreUserRequest constructor.
-     *
-     * @param Guard $auth
-     * @param Repository $config
-     */
-    public function __construct(Guard $auth, Repository $config)
-    {
-        $this->auth = $auth;
-        $this->config = $config;
-    }
+class StoreUserRequest extends FormRequest {
 
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +11,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->auth->guest();
+        return auth()->guest();
     }
 
     /**
@@ -48,7 +24,7 @@ class StoreUserRequest extends FormRequest
         return [
             'name'      => $this->getUserNameRules(),
             'email'     => ['required', 'email'],
-            'password'  => ['required', 'confirmed', 'string', 'min:' . $this->config->get('authentication.password.minLength')],
+            'password'  => ['required', 'confirmed', 'string', 'min:' . config('authentication.password.minLength')],
         ];
     }
 
@@ -59,7 +35,7 @@ class StoreUserRequest extends FormRequest
      */
     protected function getUserNameRules()
     {
-        return $this->config->get('authentication.registration.userName') == 'required'
+        return config('authentication.registration.userName') == 'required'
             ? ['required', 'string']
             : ['sometimes', 'string'];
     }
