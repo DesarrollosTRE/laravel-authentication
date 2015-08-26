@@ -23,7 +23,7 @@ class StoreUserRequest extends FormRequest {
     {
         return [
             'name'      => $this->getUserNameRules(),
-            'email'     => ['required', 'email'],
+            'email'     => ['required', 'email', 'unique:users'],
             'password'  => ['required', 'confirmed', 'string', 'min:' . config('authentication.password.minLength')],
         ];
     }

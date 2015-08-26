@@ -62,6 +62,22 @@ class UserControllerTest extends TestCase {
             ->see('The email must be a valid email address.');
     }
 
+    public function testEmailAddressCanBeRegisteredOnce()
+    {
+        $this->visit(route('authentication::user.create'))
+            ->type('john.doe@example.com', 'email')
+            ->type('some-valid-password', 'password')
+            ->type('some-valid-password', 'password_confirmation')
+            ->press(trans('authentication::user.create'));
+
+        $this->visit(route('authentication::user.create'))
+            ->type('john.doe@example.com', 'email')
+            ->type('some-valid-password', 'password')
+            ->type('some-valid-password', 'password_confirmation')
+            ->press(trans('authentication::user.create'))
+            ->see('The email has already been taken.');
+    }
+
     public function testPasswordMustBeConfirmed()
     {
         $this->visit(route('authentication::user.create'))
