@@ -8,6 +8,9 @@ class UserWasRegistered
 {
     use SerializesModels;
 
+    /**
+     * @var User
+     */
     public $user;
 
     /**
