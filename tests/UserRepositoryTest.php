@@ -1,37 +1,41 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\User;
 
 class UserRepositoryTest extends TestCase {
-
-    use DatabaseMigrations, DatabaseTransactions;
 
     /**
      * @var UserRepository
      */
     protected $repository;
 
+    /**
+     * @var User
+     */
+    protected $user;
+
     public function setUp()
     {
         parent::setUp();
 
+        $this->artisan('migrate:refresh');
+
         $this->repository = app(UserRepository::class);
+        $this->user = User::register('John Doe', 'john.doe@example.com', 'some-password');
     }
 
-    protected function defaultUser()
+    public function testItSavesUsers()
     {
-        return User::register('John Doe', 'john.doe@example.com', 'some-password');
+        $this->assertTrue($this->repository->save($this->user));
     }
 
-    public function testItSavesAUserModel()
+    public function testItChecksIfAUserExists()
     {
-        $user = $this->defaultUser();
-        $this->repository->save($user);
+        $this->repository->save($this->user);
 
-        $this->seeInDatabase('users', ['email' => 'john.doe@example.com']);
+        $this->assertTrue($this->repository->exists($this->user->email));
+        $this->assertFalse($this->repository->exists('non@existing.user'));
     }
 
 }
