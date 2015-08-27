@@ -19,7 +19,6 @@ return [
      */
     'parentView' => env('AUTH_PARENT_VIEW', 'authentication::app'),
 
-
     /*
      * Registration options
      */
@@ -39,7 +38,7 @@ return [
         /*
          * Redirect URI
          *
-         * After a successful registration, the user is redirected to the home page. With this option, you can
+         * After a successful registration, the user is redirected to the home page. With this option you can
          * configure a different destination.
          */
         'redirectUri' => env('AUTH_REGISTRATION_REDIRECT_URI', '/'),
@@ -54,7 +53,22 @@ return [
         /*
          * Minimum password length (in characters)
          */
-        'minLength' => env('AUTH_REGISTRATION_MIN_PASSWORD_LENGTH', 8),
+        'minLength' => env('AUTH_PASSWORD_MIN_LENGTH', 8),
+
+    ],
+
+    /*
+     * Login options
+     */
+    'login' => [
+
+        /*
+         * Redirect URI
+         *
+         * After a successful login attempt, the user is redirected to the homepage. With this option you can
+         * configure a different destination
+         */
+        'redirectUri' => env('AUTH_LOGIN_REDIRECT_URI', '/'),
 
     ],
 
