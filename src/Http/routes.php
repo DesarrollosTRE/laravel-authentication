@@ -25,5 +25,9 @@ Route::group(['as' => 'authentication::'], function () {
         'as' => 'session.store',
         'uses' => 'Speelpenning\Authentication\Http\Controllers\SessionController@store'
     ]);
+    Route::get('logout', [
+        'as' => 'session.destroy',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\SessionController@destroy'
+    ]);
 
 });

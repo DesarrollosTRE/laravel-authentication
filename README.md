@@ -77,3 +77,14 @@ After a successful login attempt, the user will be redirected to this URI.
 AUTH_LOGIN_REDIRECT_URI=<uri>
 ```
 Default value: /
+
+### Logout options
+ 
+#### Redirect URI
+
+After a logout is performed, the user will be redirected to this URI.
+
+```ini
+AUTH_LOGIN_REDIRECT_URI=<uri>
+```
+Default value: /

@@ -2,7 +2,8 @@
 
     {!! csrf_field() !!}
 
-    {!! $errors->first('creation_failed', '<div class="alert alert-danger">:message</div>') !!}
+    {!! $errors->first('authentication::login_error', '<div class="alert alert-danger">:message</div>') !!}
+    {!! $errors->first('authentication::login_warning', '<div class="alert alert-warning">:message</div>') !!}
 
     <div class="form-group">
         <label for="email">{{ trans('authentication::user.email') }}</label>

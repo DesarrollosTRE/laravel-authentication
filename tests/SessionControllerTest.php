@@ -45,4 +45,19 @@ class SessionControllerTest extends TestCase {
             ->see(trans('authentication::session.creation_failed'));
     }
 
+    public function testUserLogout()
+    {
+        $this->testValidLoginAttempt();
+
+        $this->visit(route('authentication::session.destroy'))
+            ->seePageIs(config('authentication.logout.redirectUri'));
+    }
+
+    public function testExpiredSession()
+    {
+        $this->visit(route('authentication::session.destroy'))
+            ->seePageIs(route('authentication::session.create'))
+            ->see(trans('authentication::session.expired'));
+    }
+
 }

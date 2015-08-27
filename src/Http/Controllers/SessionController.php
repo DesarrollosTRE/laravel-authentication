@@ -5,7 +5,9 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Speelpenning\Authentication\Exceptions\LoginFailed;
+use Speelpenning\Authentication\Exceptions\SessionHasExpired;
 use Speelpenning\Authentication\Jobs\AttemptUserLogin;
+use Speelpenning\Authentication\Jobs\PerformUserLogout;
 
 class SessionController extends Controller {
 
@@ -38,8 +40,21 @@ class SessionController extends Controller {
         }
         catch (LoginFailed $e) {
             return redirect()->back()->withInput()->withErrors([
-                'creation_failed' => $e->getMessage()
+                'authentication::login_error' => $e->getMessage()
             ]);
+        }
+    }
+
+    public function destroy()
+    {
+        try {
+            $this->dispatch(new PerformUserLogout());
+            return redirect($this->config->get('authentication.logout.redirectUri'));
+        }
+        catch (SessionHasExpired $e) {
+           return redirect()->route('authentication::session.create')->withErrors([
+               'authentication::login_warning' => $e->getMessage()
+           ]);
         }
     }
 

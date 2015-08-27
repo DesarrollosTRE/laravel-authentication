@@ -66,9 +66,24 @@ return [
          * Redirect URI
          *
          * After a successful login attempt, the user is redirected to the homepage. With this option you can
-         * configure a different destination
+         * configure a different destination.
          */
         'redirectUri' => env('AUTH_LOGIN_REDIRECT_URI', '/'),
+
+    ],
+
+    /*
+     * Logout options
+     */
+    'logout' => [
+
+        /*
+         * Redirect URI
+         *
+         * After logging out, the user is redirected to the homepage. With this option you can configure a
+         * different destination.
+         */
+        'redirectUri' => env('AUTH_LOGOUT_REDIRECT_URI', '/'),
 
     ],
 
