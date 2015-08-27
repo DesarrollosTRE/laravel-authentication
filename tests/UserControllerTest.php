@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Speelpenning\Authentication\User;
 
 class UserControllerTest extends TestCase {
 
-    use DatabaseMigrations, DatabaseTransactions;
+    /**
+     * @var User
+     */
+    protected $user;
 
     public function setUp()
     {
@@ -14,6 +16,10 @@ class UserControllerTest extends TestCase {
         config([
             'authentication.enableRoutes' => true,
         ]);
+
+        $this->artisan('migrate:refresh');
+
+        $this->user = User::register('John Doe', 'john.doe@example.com', 'some-valid-password');
     }
 
     public function testDefaultRegistrationForm()
@@ -65,15 +71,15 @@ class UserControllerTest extends TestCase {
     public function testEmailAddressCanBeRegisteredOnce()
     {
         $this->visit(route('authentication::user.create'))
-            ->type('john.doe@example.com', 'email')
-            ->type('some-valid-password', 'password')
-            ->type('some-valid-password', 'password_confirmation')
+            ->type($this->user->email, 'email')
+            ->type($this->user->password, 'password')
+            ->type($this->user->password, 'password_confirmation')
             ->press(trans('authentication::user.create'));
 
         $this->visit(route('authentication::user.create'))
-            ->type('john.doe@example.com', 'email')
-            ->type('some-valid-password', 'password')
-            ->type('some-valid-password', 'password_confirmation')
+            ->type($this->user->email, 'email')
+            ->type($this->user->password, 'password')
+            ->type($this->user->password, 'password_confirmation')
             ->press(trans('authentication::user.create'))
             ->see('The email has already been taken.');
     }
@@ -81,7 +87,7 @@ class UserControllerTest extends TestCase {
     public function testPasswordMustBeConfirmed()
     {
         $this->visit(route('authentication::user.create'))
-            ->type('some-password', 'password')
+            ->type($this->user->password, 'password')
             ->press(trans('authentication::user.create'))
             ->see('The password confirmation does not match.');
     }
@@ -89,8 +95,8 @@ class UserControllerTest extends TestCase {
     public function testDefaultPasswordLength()
     {
         $this->visit(route('authentication::user.create'))
-            ->type('short', 'password')
-            ->type('short', 'password_confirmation')
+            ->type(1234, 'password')
+            ->type(1234, 'password_confirmation')
             ->press(trans('authentication::user.create'))
             ->see('The password must be at least 8 characters.');
     }
@@ -100,8 +106,8 @@ class UserControllerTest extends TestCase {
         config(['authentication.password.minLength' => 10]);
 
         $this->visit(route('authentication::user.create'))
-            ->type('short', 'password')
-            ->type('short', 'password_confirmation')
+            ->type(1234, 'password')
+            ->type(1234, 'password_confirmation')
             ->press(trans('authentication::user.create'))
             ->see('The password must be at least 10 characters.');
     }
@@ -111,12 +117,22 @@ class UserControllerTest extends TestCase {
         config(['authentication.registration.redirectUri' => route('authentication::user.create')]);
 
         $this->visit(route('authentication::user.create'))
-            ->type('John Doe', 'name')
-            ->type('john.doe@example.com', 'email')
-            ->type('some-valid-password', 'password')
-            ->type('some-valid-password', 'password_confirmation')
+            ->type($this->user->name, 'name')
+            ->type($this->user->email, 'email')
+            ->type($this->user->password, 'password')
+            ->type($this->user->password, 'password_confirmation')
             ->press(trans('authentication::user.create'))
             ->seePageIs(route('authentication::user.create'));
+    }
+
+    public function testRememberOldInputAfterFailedRegistration()
+    {
+        $this->visit(route('authentication::user.create'))
+            ->type($this->user->name, 'name')
+            ->type($this->user->email, 'email')
+            ->press(trans('authentication::user.create'))
+            ->seeInField('name', $this->user->name)
+            ->seeInField('email', $this->user->email);
     }
 
 }
