@@ -1,12 +1,12 @@
 <?php namespace Speelpenning\Authentication;
 
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Model as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Model
-{
+class User extends Model implements AuthenticatableContract {
 
-    use SoftDeletes;
+    use Authenticatable;
 
     /**
      * The database table used by the model.
