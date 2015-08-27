@@ -37,7 +37,9 @@ class SessionController extends Controller {
             return redirect($this->config->get('authentication.login.redirectUri'));
         }
         catch (LoginFailed $e) {
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->withErrors([
+                'creation_failed' => $e->getMessage()
+            ]);
         }
     }
 

@@ -30,10 +30,19 @@ class SessionControllerTest extends TestCase {
     public function testValidLoginAttempt()
     {
         $this->visit(route('authentication::session.create'))
-            ->type('john.doe@example.com', 'email')
-            ->type('some-password', 'password')
+            ->type($this->user->email, 'email')
+            ->type($this->user->password, 'password')
             ->press(trans('authentication::session.create'))
             ->seePageIs(config('authentication.login.redirectUri'));
+    }
+
+    public function testInvalidLoginAttempt()
+    {
+        $this->visit(route('authentication::session.create'))
+            ->type('non@existing.user', 'email')
+            ->type('invalid-password', 'password')
+            ->press(trans('authentication::session.create'))
+            ->see(trans('authentication::session.creation_failed'));
     }
 
 }
