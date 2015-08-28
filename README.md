@@ -1,5 +1,11 @@
 # Authentication for Laravel 5.1
 
+[![Build Status](https://travis-ci.org/Speelpenning-nl/laravel-authentication.svg)](https://travis-ci.org/Speelpenning-nl/laravel-authentication)
+[![codecov.io](http://codecov.io/github/Speelpenning-nl/laravel-authentication/coverage.svg?branch=master)](http://codecov.io/github/Speelpenning-nl/laravel-authentication?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/speelpenning/laravel-authentication/version)](https://packagist.org/packages/speelpenning/laravel-authentication)
+[![Latest Unstable Version](https://poser.pugx.org/speelpenning/laravel-authentication/v/unstable)](//packagist.org/packages/speelpenning/laravel-authentication)
+[![License](https://poser.pugx.org/speelpenning/laravel-authentication/license)](https://packagist.org/packages/speelpenning/laravel-authentication)
+
 This package is build to quick start authentication for your Laravel application. It provides:
 - A simple user model (Eloquent), which is stored in the user table that comes with Laravel
 - User controller for registration
