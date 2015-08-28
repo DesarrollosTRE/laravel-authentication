@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php": ">=5.5.9",
         "laravel/laravel": "5.1.*"
     },
     "require-dev": {
@@ -18,5 +19,10 @@
         "psr-4": {
             "Speelpenning\\Authentication\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
     }
 }
