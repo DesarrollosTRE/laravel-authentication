@@ -30,4 +30,20 @@ Route::group(['as' => 'authentication::'], function () {
         'uses' => 'Speelpenning\Authentication\Http\Controllers\SessionController@destroy'
     ]);
 
+    /*
+     * Profile routes
+     */
+    Route::get('profile', [
+        'as' => 'user.show',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\ProfileController@show'
+    ]);
+    Route::get('profile/edit', [
+        'as' => 'user.edit',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\ProfilerController@edit'
+    ]);
+    Route::patch('profile', [
+        'as' => 'user.update',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\ProfileController@update'
+    ]);
+
 });
