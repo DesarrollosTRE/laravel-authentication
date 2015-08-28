@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Testing\TestCase as LaravelTestCase;
 use Speelpenning\Authentication\AuthenticationServiceProvider;
+use Speelpenning\Authentication\User;
 
 abstract class TestCase extends LaravelTestCase {
 
@@ -23,9 +24,21 @@ abstract class TestCase extends LaravelTestCase {
 
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
+        $this->configureLaravel();
+
         $app->register(AuthenticationServiceProvider::class);
 
         return $app;
+    }
+
+    protected function configureLaravel()
+    {
+        config([
+            'auth.model' => User::class,
+            'authentication.enableRoutes' => true,
+            'database.default' => 'sqlite',
+            'database.connections.sqlite.database' => ':memory:',
+        ]);
     }
 
 }

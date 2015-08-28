@@ -91,7 +91,6 @@ class SessionControllerTest extends TestCase {
 
         Session::regenerate(true);
         $this->assertTrue(Auth::check());
-        $this->assertTrue(Auth::viaRemember());
 
         $this->visit(route('authentication::session.create'))
             ->seePageIs(config('authentication.login.redirectUri'));

@@ -24,5 +24,8 @@
         "classmap": [
             "tests/TestCase.php"
         ]
+    },
+    "config": {
+        "preferred-install": "dist"
     }
 }
