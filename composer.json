@@ -1,6 +1,6 @@
 {
     "name": "speelpenning/laravel-authentication",
-    "description": "Authentication for B2B and B2C.",
+    "description": "Fully configurable B2C and B2B authentication for Laravel 5.1.",
     "license": "MIT",
     "authors": [
         {
@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php": ">=5.5.9",
         "laravel/laravel": "5.1.*"
     },
     "require-dev": {
@@ -18,5 +19,13 @@
         "psr-4": {
             "Speelpenning\\Authentication\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
     }
 }
