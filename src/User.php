@@ -1,10 +1,11 @@
 <?php namespace Speelpenning\Authentication;
 
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Model as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model implements AuthenticatableContract {
+class User extends Model implements AuthenticatableContract
+{
 
     use Authenticatable;
 
