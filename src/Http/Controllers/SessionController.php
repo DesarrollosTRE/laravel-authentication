@@ -1,11 +1,14 @@
 <?php namespace Speelpenning\Authentication\Http\Controllers;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Speelpenning\Authentication\Exceptions\LoginFailed;
+use Speelpenning\Authentication\Exceptions\RememberingUserFailed;
 use Speelpenning\Authentication\Exceptions\SessionHasExpired;
+use Speelpenning\Authentication\Jobs\AttemptRememberingUser;
 use Speelpenning\Authentication\Jobs\AttemptUserLogin;
 use Speelpenning\Authentication\Jobs\PerformUserLogout;
 
@@ -29,7 +32,13 @@ class SessionController extends Controller {
 
     public function create()
     {
-        return view('authentication::session.create');
+        try {
+            $this->dispatch(new AttemptRememberingUser());
+            return redirect($this->config->get('authentication.login.redirectUri'));
+        }
+        catch (RememberingUserFailed $e) {
+            return view('authentication::session.create');
+        }
     }
 
     public function store(Request $request)

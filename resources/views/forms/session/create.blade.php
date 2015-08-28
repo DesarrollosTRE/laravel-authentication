@@ -15,6 +15,19 @@
         <input type="password" name="password" class="form-control" required>
     </div>
 
+    @if(config('authentication.login.rememberMe') != 'off')
+        <div class="checkbox">
+            <label>
+                @if(config('authentication.login.rememberMe') == 'default')
+                    <input type="checkbox" name="remember" checked>
+                @else
+                    <input type="checkbox" name="remember">
+                @endif
+                {{ trans('authentication::session.remember_me') }}
+            </label>
+        </div>
+    @endif
+
     <div class="form-group">
         <button type="submit" class="btn btn-primary">
             {{ trans('authentication::session.create') }}

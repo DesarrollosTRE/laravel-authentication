@@ -68,7 +68,16 @@ AUTH_PASSWORD_MIN_LENGTH=<length>
 Default value: 8
 
 ### Login options
- 
+
+#### Remember me
+
+If you want to offer your users the convenience of remembering their login, switch this option to on.
+
+```ini
+AUTH_LOGIN_REMEMBER_ME=[on|off|default]
+```
+Default value: off
+
 #### Redirect URI
 
 After a successful login attempt, the user will be redirected to this URI.

@@ -1,6 +1,6 @@
 {
     "name": "speelpenning/laravel-authentication",
-    "description": "Authentication for B2B and B2C.",
+    "description": "Fully configurable B2C and B2B authentication for Laravel 5.1.",
     "license": "MIT",
     "authors": [
         {

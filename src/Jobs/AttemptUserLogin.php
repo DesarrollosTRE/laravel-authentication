@@ -17,14 +17,23 @@ class AttemptUserLogin implements SelfHandling {
     protected $credentials;
 
     /**
+     * Indicates if the user login should be remembered.
+     *
+     * @var bool
+     */
+    protected $remember;
+
+    /**
      * Create a new job instance.
      *
      * @param string $email
      * @param string $password
+     * @param bool $remember
      */
-    public function __construct($email, $password)
+    public function __construct($email, $password, $remember = false)
     {
         $this->credentials = compact('email', 'password');
+        $this->remember = (bool)$remember;
     }
 
     /**
@@ -37,7 +46,7 @@ class AttemptUserLogin implements SelfHandling {
      */
     public function handle(Guard $auth, Dispatcher $event, Translator $translator)
     {
-        if ( ! $auth->attempt($this->credentials)) {
+        if ( ! $auth->attempt($this->credentials, $this->remember)) {
             throw new LoginFailed($translator->get('authentication::session.creation_failed'));
         }
 

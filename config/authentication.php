@@ -30,7 +30,7 @@ return [
          * By default the user's name field is shown, but not required. You can change the default behaviour to:
          *
          *      on          Shows the name field, but it is not required.
-         *      off         Does not show the name field.
+         *      off         Hides the name field.
          *      required    Shows the name field and makes it required.
          */
         'userName' => env('AUTH_REGISTRATION_USERNAME', 'on'),
@@ -61,6 +61,18 @@ return [
      * Login options
      */
     'login' => [
+
+        /*
+         * Remember me
+         *
+         * You can offer your users the convenience of remembering their login by switching this option to on
+         * or default.
+         *
+         *      on          Shows the remember me checkbox.
+         *      off         Hides the remember me checkbox.
+         *      default     Checks the remember me checkbox by default.
+         */
+        'rememberMe' => env('AUTH_LOGIN_REMEMBER_ME', 'off'),
 
         /*
          * Redirect URI
