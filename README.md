@@ -13,7 +13,50 @@ This package is made to quick start a highly configurable authentication for you
 - Twitter bootstrap views with reusable forms
 - Events to hook your listeners on (logging, notifications, e-mails, etc.)
 
-## List of events
+## Getting started
+
+### Installation
+
+Pull in the package by Composer:
+
+```bash
+composer require speelpenning/laravel-authentication
+```
+
+Add the service provider to app.php:
+ 
+```php
+Speelpenning\Authentication\AuthenticationServiceProvider::class,
+```
+
+### The user model
+
+There are two options for implementation: using the model that comes with the package or strip App\User and let it extend the package's user model. Most likely you choose to extend, so you can add your own logic and relationships to the model.
+
+For just using the package's model, change the model entry in auth.php like so:
+
+```php
+'model' => Speelpenning\Authentication\User::class,
+```
+
+Extending can be done like so:
+
+```php
+<?php namespace App;
+
+use Speelpenning\Authentication\User as BaseUser;
+
+class User extends BaseUser
+{
+
+    //
+
+}
+```
+
+### Integration in your app
+
+For this, I recommend you to read the configuration section below. When you have a configuration that satisfies your needs, you may add some listeners to the following events:
 
 ```php
 Speelpenning\Authentication\Events\UserHasLoggedIn
