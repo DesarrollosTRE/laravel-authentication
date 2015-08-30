@@ -39,7 +39,7 @@ Route::group(['as' => 'authentication::'], function () {
     ]);
     Route::get('profile/edit', [
         'as' => 'user.edit',
-        'uses' => 'Speelpenning\Authentication\Http\Controllers\ProfilerController@edit'
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\ProfileController@edit'
     ]);
     Route::patch('profile', [
         'as' => 'user.update',
