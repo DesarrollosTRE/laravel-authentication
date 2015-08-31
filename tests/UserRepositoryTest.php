@@ -25,17 +25,36 @@ class UserRepositoryTest extends TestCase {
         $this->user = User::register('John Doe', 'john.doe@example.com', 'some-password');
     }
 
+    protected function saveUser()
+    {
+        return $this->repository->save($this->user);
+    }
+
     public function testItSavesUsers()
     {
-        $this->assertTrue($this->repository->save($this->user));
+        $this->assertTrue($this->saveUser());
     }
 
     public function testItChecksIfAUserExists()
     {
-        $this->repository->save($this->user);
+        $this->saveUser();
 
         $this->assertTrue($this->repository->exists($this->user->email));
         $this->assertFalse($this->repository->exists('non@existing.user'));
+    }
+
+    public function testItFindsUsersById()
+    {
+        $this->saveUser();
+
+        $this->assertInstanceOf(User::class, $this->repository->find(1));
+    }
+
+    public function testItFindsUsersByEmailAddress()
+    {
+        $this->saveUser();
+        
+        $this->assertInstanceOf(User::class, $this->repository->findByEmailAddress($this->user->email));
     }
 
 }
