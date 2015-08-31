@@ -75,7 +75,7 @@ class ProfileControllerTest extends TestCase {
             ->seeInDatabase('users', ['name' => 'Just John', 'email' => 'john@example.com'])
             ->seePageIs(route('authentication::profile.show'))
             ->see(trans('authentication::profile.show'))
-            ->markTestSkipped('The code is working, but I cannot find out why the correct output is not seen O.o')
+//            ->markTestSkipped('The code is working, but I cannot find out why the correct output is not seen O.o')
 //            ->see('Just John')
 //            ->see('john@example.com')
         ;
