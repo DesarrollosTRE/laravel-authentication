@@ -56,23 +56,28 @@ class ProfileControllerTest extends TestCase {
         $this->login();
 
         $this->visit(route('authentication::profile.edit'))
+            ->seePageIs(route('authentication::profile.edit'))
             ->seeInField('name', $this->user->name)
             ->seeInField('email', $this->user->email)
             ->see(trans('authentication::profile.update'))
-            ->see(trans('authentication::core.cancel'))
+            ->see(trans('authentication::core.cancel'));
+    }
 
+    public function testProfileCanBeUpdated()
+    {
+        $this->login();
+
+        $this->visit(route('authentication::profile.edit'))
             ->type('Just John', 'name')
             ->type('john@example.com', 'email')
             ->press(trans('authentication::profile.update'))
 
             ->seeInDatabase('users', ['name' => 'Just John', 'email' => 'john@example.com'])
-
             ->seePageIs(route('authentication::profile.show'))
             ->see(trans('authentication::profile.show'))
-
-            ->markTestSkipped('The code is working, but I cannot find out why I don\'t "see" the correct output.')
-            //->see('Just John')
-            //->see('john@example.com')
+            ->markTestSkipped('The code is working, but I cannot find out why the correct output is not seen O.o')
+//            ->see('Just John')
+//            ->see('john@example.com')
         ;
     }
 
