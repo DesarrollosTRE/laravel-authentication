@@ -5,6 +5,8 @@ use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller;
 use Speelpenning\Authentication\Http\Middleware\Authenticate;
+use Speelpenning\Authentication\Http\Requests\UpdateUserRequest;
+use Speelpenning\Authentication\Jobs\UpdateUser;
 
 class ProfileController extends Controller {
 
@@ -36,21 +38,23 @@ class ProfileController extends Controller {
 
     public function show()
     {
-        return view('authentication::user.show')->with('user', $this->auth->user());
+        return view('authentication::profile.show')
+            ->with('user', $this->auth->user());
     }
 
     public function edit()
     {
-        return 'edit';
+        return view('authentication::profile.edit')
+            ->with('user', $this->auth->user());
     }
 
-    public function update()
+    public function update(UpdateUserRequest $request)
     {
-        return 'update';
+        $request->merge(['id' => $this->auth->user()->id]);
 
-        $this->dispatchFrom(null, $request);
+        $this->dispatchFrom(UpdateUser::class, $request);
 
-        return redirect('authentication::profile.show');
+        return redirect()->route('authentication::profile.show');
     }
 
 }

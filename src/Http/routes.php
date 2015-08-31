@@ -34,15 +34,15 @@ Route::group(['as' => 'authentication::'], function () {
      * Profile routes
      */
     Route::get('profile', [
-        'as' => 'user.show',
+        'as' => 'profile.show',
         'uses' => 'Speelpenning\Authentication\Http\Controllers\ProfileController@show'
     ]);
     Route::get('profile/edit', [
-        'as' => 'user.edit',
+        'as' => 'profile.edit',
         'uses' => 'Speelpenning\Authentication\Http\Controllers\ProfileController@edit'
     ]);
     Route::patch('profile', [
-        'as' => 'user.update',
+        'as' => 'profile.update',
         'uses' => 'Speelpenning\Authentication\Http\Controllers\ProfileController@update'
     ]);
 
