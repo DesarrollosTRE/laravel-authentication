@@ -15,6 +15,8 @@ return [
      * Actions
      */
     'create'                => 'Create your account',
+    'edit'                  => 'Edit your profile',
+    'show'                  => 'Your profile',
 
     /*
      * Messages
