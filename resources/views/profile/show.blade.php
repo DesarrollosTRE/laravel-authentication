@@ -26,6 +26,13 @@
                     </a>
                 </div>
 
+                <hr>
+
+                <ul class="list-inline">
+                    <li><a href="{{ route('authentication::password.edit') }}">{{ trans('authentication::password.edit') }}</a></li>
+                    <li><a href="{{ route('authentication::session.destroy') }}">{{ trans('authentication::session.destroy') }}</a></li>
+                </ul>
+
             </div>
         </div>
     </div>

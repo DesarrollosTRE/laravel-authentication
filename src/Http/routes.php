@@ -46,4 +46,16 @@ Route::group(['as' => 'authentication::'], function () {
         'uses' => 'Speelpenning\Authentication\Http\Controllers\ProfileController@update'
     ]);
 
+    /*
+     * Password routes
+     */
+    Route::get('password', [
+        'as' => 'password.edit',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\PasswordController@edit'
+    ]);
+    Route::patch('password', [
+        'as' => 'password.update',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\PasswordController@update'
+    ]);
+
 });
