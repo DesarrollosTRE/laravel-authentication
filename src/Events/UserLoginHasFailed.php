@@ -3,23 +3,23 @@
 use Illuminate\Queue\SerializesModels;
 use Speelpenning\Authentication\User;
 
-class UserHasLoggedIn {
+class UserLoginHasFailed {
 
     use SerializesModels;
 
     /**
-     * @var User
+     * @var string
      */
-    public $user;
+    public $email;
 
     /**
      * Create a new event instance.
      *
-     * @param User $user
+     * @param string $email
      */
-    public function __construct(User $user)
+    public function __construct($email)
     {
-        $this->user = $user;
+        $this->email = $email;
     }
 
 }

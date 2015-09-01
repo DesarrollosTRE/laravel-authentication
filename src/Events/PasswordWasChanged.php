@@ -3,7 +3,7 @@
 use Illuminate\Queue\SerializesModels;
 use Speelpenning\Authentication\User;
 
-class UserHasLoggedIn {
+class PasswordWasChanged {
 
     use SerializesModels;
 

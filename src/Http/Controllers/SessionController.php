@@ -34,7 +34,7 @@ class SessionController extends Controller {
     {
         try {
             $this->dispatch(new AttemptRememberingUser());
-            return redirect($this->config->get('authentication.login.redirectUri'));
+            return redirect()->intended($this->config->get('authentication.login.redirectUri'));
         }
         catch (RememberingUserFailed $e) {
             return view('authentication::session.create');
@@ -45,7 +45,7 @@ class SessionController extends Controller {
     {
         try {
             $this->dispatchFrom(AttemptUserLogin::class, $request);
-            return redirect($this->config->get('authentication.login.redirectUri'));
+            return redirect()->intended($this->config->get('authentication.login.redirectUri'));
         }
         catch (LoginFailed $e) {
             return redirect()->back()->withInput()->withErrors([

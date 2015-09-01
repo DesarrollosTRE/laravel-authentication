@@ -5,6 +5,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Translation\Translator;
 use Speelpenning\Authentication\Events\UserHasLoggedIn;
+use Speelpenning\Authentication\Events\UserLoginHasFailed;
 use Speelpenning\Authentication\Exceptions\LoginFailed;
 
 class AttemptUserLogin implements SelfHandling {
@@ -47,6 +48,7 @@ class AttemptUserLogin implements SelfHandling {
     public function handle(Guard $auth, Dispatcher $event, Translator $translator)
     {
         if ( ! $auth->attempt($this->credentials, $this->remember)) {
+            $event->fire(new UserLoginHasFailed($auth->user()));
             throw new LoginFailed($translator->get('authentication::session.creation_failed'));
         }
 

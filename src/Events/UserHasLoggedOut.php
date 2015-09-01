@@ -3,8 +3,8 @@
 use Illuminate\Queue\SerializesModels;
 use Speelpenning\Authentication\User;
 
-class UserHasLoggedOut
-{
+class UserHasLoggedOut {
+
     use SerializesModels;
 
     /**

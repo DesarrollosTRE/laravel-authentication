@@ -96,4 +96,14 @@ class SessionControllerTest extends TestCase {
             ->seePageIs(config('authentication.login.redirectUri'));
     }
 
+    public function testRedirectToIntendedLocation()
+    {
+        $this->visit(route('authentication::profile.edit'))
+            ->seePageIs(route('authentication::session.create'))
+            ->type($this->user->email, 'email')
+            ->type($this->user->password, 'password')
+            ->press(trans('authentication::session.create'))
+            ->seePageIs(route('authentication::profile.edit'));
+    }
+
 }

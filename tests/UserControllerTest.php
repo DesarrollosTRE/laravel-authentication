@@ -13,10 +13,6 @@ class UserControllerTest extends TestCase {
     {
         parent::setUp();
 
-        config([
-            'authentication.enableRoutes' => true,
-        ]);
-
         $this->artisan('migrate:refresh');
 
         $this->user = User::register('John Doe', 'john.doe@example.com', 'some-valid-password');
