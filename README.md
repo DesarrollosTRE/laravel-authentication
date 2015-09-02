@@ -59,10 +59,13 @@ class User extends BaseUser
 For this, I recommend you to read the configuration section below. When you have a configuration that satisfies your needs, you may add some listeners to the following events:
 
 ```php
+Speelpenning\Authentication\Events\PasswordWasChanged
 Speelpenning\Authentication\Events\UserHasLoggedIn
 Speelpenning\Authentication\Events\UserHasLoggedOut
+Speelpenning\Authentication\Events\UserHasLoginHasFailed
 Speelpenning\Authentication\Events\UserWasRegistered
 Speelpenning\Authentication\Events\UserWasRemembered
+Speelpenning\Authentication\Events\UserWasUpdated
 ```
 
 ## Configuration
@@ -74,7 +77,7 @@ To avoid publishing the config, all configuration can be done through the .env f
 The routes included with the package are disabled by default to avoid conflicts with your application. They can be enabled like so:
 
 ```ini
-AUTH_ENABLE_ROUTES=true
+AUTH_ENABLE_ROUTES=[true|false]
 ```
 Default value: false
 
