@@ -59,36 +59,6 @@ return [
     ],
 
     /*
-     * Password reset options
-     */
-    'passwordReset' => [
-
-        /*
-         * E-mail view
-         *
-         * Set the name of your e-mail here to override the package's default view.
-         */
-        'email' => env('AUTH_PASSWORD_RESET_EMAIL', 'authentication::emails.password-reset'),
-
-        /*
-         * Sender details
-         *
-         *      email   The e-mail address that is used for sending reset tokens.
-         *      name    The name that is used as sender.
-         */
-        'from' => [
-            'email' => env('AUTH_PASSWORD_RESET_FROM_EMAIL', config('mail.from.address')),
-            'name' => env('AUTH_PASSWORD_RESET_FROM_ADDRESS', config('mail.from.name')),
-        ],
-
-        /*
-         * Expire time (in minutes)
-         */
-        'expiresAfter' => env('AUTH_PASSWORD_RESET_EXPIRES_AFTER', config('auth.password.expire')),
-
-    ],
-
-    /*
      * Login options
      */
     'login' => [
@@ -127,6 +97,37 @@ return [
          * different destination.
          */
         'redirectUri' => env('AUTH_LOGOUT_REDIRECT_URI', '/'),
+
+    ],
+
+    /*
+     * Password reset options
+     */
+    'passwordReset' => [
+
+        /*
+         * E-mail view
+         *
+         * Set the name of your e-mail here to override the package's default view. The view receives the user ($user)
+         * and password reset model ($passwordReset).
+         */
+        'email' => env('AUTH_PASSWORD_RESET_EMAIL', 'authentication::emails.password-reset'),
+
+        /*
+         * Sender details
+         *
+         *      email   The e-mail address that is used for sending reset tokens.
+         *      name    The name that is used as sender.
+         */
+        'from' => [
+            'email' => env('AUTH_PASSWORD_RESET_FROM_EMAIL', config('mail.from.address')),
+            'name' => env('AUTH_PASSWORD_RESET_FROM_NAME', config('mail.from.name')),
+        ],
+
+        /*
+         * Expire time (in minutes)
+         */
+        'expiresAfter' => env('AUTH_PASSWORD_RESET_EXPIRES_AFTER', config('auth.password.expire')),
 
     ],
 
