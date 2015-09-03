@@ -4,6 +4,7 @@
 
     {!! $errors->first('authentication::login_error', '<div class="alert alert-danger">:message</div>') !!}
     {!! $errors->first('authentication::login_warning', '<div class="alert alert-warning">:message</div>') !!}
+    {!! $errors->first('authentication::password-reset.updated', '<div class="alert alert-success">:message</div>') !!}
 
     <div class="form-group">
         <label for="email">{{ trans('authentication::user.email') }}</label>
@@ -32,6 +33,9 @@
         <button type="submit" class="btn btn-primary">
             {{ trans('authentication::session.create') }}
         </button>
+        <a href="{{ route('authentication::password-reset.create') }}">
+            {{ trans('authentication::password-reset.forgot_your_password') }}
+        </a>
     </div>
 
 </form>

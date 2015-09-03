@@ -59,10 +59,15 @@ class User extends BaseUser
 For this, I recommend you to read the configuration section below. When you have a configuration that satisfies your needs, you may add some listeners to the following events:
 
 ```php
+Speelpenning\Authentication\Events\PasswordResetLinkWasSent
+Speelpenning\Authentication\Events\PasswordWasChanged
+Speelpenning\Authentication\Events\PasswordWasReset
 Speelpenning\Authentication\Events\UserHasLoggedIn
 Speelpenning\Authentication\Events\UserHasLoggedOut
+Speelpenning\Authentication\Events\UserHasLoginHasFailed
 Speelpenning\Authentication\Events\UserWasRegistered
 Speelpenning\Authentication\Events\UserWasRemembered
+Speelpenning\Authentication\Events\UserWasUpdated
 ```
 
 ## Configuration
@@ -74,11 +79,11 @@ To avoid publishing the config, all configuration can be done through the .env f
 The routes included with the package are disabled by default to avoid conflicts with your application. They can be enabled like so:
 
 ```ini
-AUTH_ENABLE_ROUTES=true
+AUTH_ENABLE_ROUTES=[true|false]
 ```
 Default value: false
 
-### Parent view
+### Parent and e-mail view
 
 The package comes with a plain white bootstrap parent view. Maybe that satisfies the needs for a backend application, but if you are not very much charmed by that, change it with the following line:
 
@@ -87,7 +92,10 @@ AUTH_PARENT_VIEW=<view-name>
 ```
 Default value: authentication::app
 
-Each view fills two sections: title and content.
+```ini
+AUTH_EMAIL_VIEW=<view-name>
+```
+Default value: authentication::email
 
 ### Registration options
 
@@ -148,3 +156,37 @@ After a logout is performed, the user will be redirected to this URI. This must 
 AUTH_LOGIN_REDIRECT_URI=<uri>
 ```
 Default value: /
+
+### Password reset options
+
+#### E-mail view
+
+Set the name of your e-mail here to override the package's default view. The view receives the user ($user) and password reset model ($passwordReset).
+
+```ini
+AUTH_PASSWORD_RESET_EMAIL=<view-name>
+```
+Default value: authentication::emails.password-reset
+
+#### Sender details
+
+Configure these sender details if you want them to be different from the global mail configuration. 
+
+```ini
+AUTH_PASSWORD_RESET_FROM_EMAIL=<email-address>
+```
+Default value: config('mail.from.address')
+
+```ini
+AUTH_PASSWORD_RESET_FROM_NAME=<sender-name>
+```
+Default value: config('mail.from.name')
+
+#### Token expire time (in minutes)
+
+By default Laravel's auth password expire is used.
+
+```ini
+AUTH_PASSWORD_RESET_EXPIRES_AFTER=<minutes>
+```
+Default value: config('auth.password.expire')
