@@ -36,25 +36,25 @@ class SendPasswordResetLink implements SelfHandling {
      * Execute the job.
      *
      * @param UserRepository $users
-     * @param PasswordResetRepository $repository
+     * @param PasswordResetRepository $resets
      * @param Repository $config
      * @param Mailer $mail
      * @param Dispatcher $event
      * @return void
      */
-    public function handle(UserRepository $users, PasswordResetRepository $repository, Repository $config, Mailer $mail, Dispatcher $event)
+    public function handle(UserRepository $users, PasswordResetRepository $resets, Repository $config, Mailer $mail, Dispatcher $event)
     {
-        $repository->cleanUp($this->email);
+        $resets->cleanUp($this->email);
 
         $user = $users->findByEmailAddress($this->email);
 
-        $reset = PasswordReset::generate($this->email);
+        $passwordReset = PasswordReset::generate($this->email);
 
-        $repository->save($reset);
+        $resets->save($passwordReset);
 
         $mail->send(
             $config->get('authentication.passwordReset.email'),
-            compact('user', 'reset'),
+            compact('user', 'passwordReset'),
             function (Message $message) use ($user, $config) {
                 $message
                     ->from($config->get('authentication.passwordReset.from.email'), $config->get('authentication.passwordReset.from.name'))
@@ -63,6 +63,6 @@ class SendPasswordResetLink implements SelfHandling {
             }
         );
 
-        $event->fire(new PasswordResetLinkWasSent($reset));
+        $event->fire(new PasswordResetLinkWasSent($passwordReset));
     }
 }
