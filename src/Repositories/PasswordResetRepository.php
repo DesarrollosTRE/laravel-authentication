@@ -34,18 +34,6 @@ class PasswordResetRepository {
     }
 
     /**
-     * Finds a password reset by token.
-     *
-     * @param string $token
-     * @return PasswordReset
-     * @throws ModelNotFoundException
-     */
-    public function findByToken($token)
-    {
-        return PasswordReset::where('token', $token)->firstOrFail();
-    }
-
-    /**
      * Finds a password reset by e-mail address and token.
      *
      * @param string $email
