@@ -145,4 +145,21 @@ class PasswordResetControllerTest extends TestCase {
             ->seePageIs(route('authentication::password-reset.create'))
             ->see(trans('authentication::password-reset.expired'));
     }
+
+    public function testTokenCanExpireForcingUpdate()
+    {
+        $reset = $this->generateReset();
+
+        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->token]))
+            ->type($this->user->email, 'email')
+            ->type('some-new-password', 'password')
+            ->type('some-new-password', 'password_confirmation');
+
+        config(['authentication.passwordReset.expiresAfter' => -60]);
+
+        $this->press(trans('authentication::password-reset.edit'))
+            ->seePageIs(route('authentication::password-reset.create'))
+            ->see(trans('authentication::password-reset.expired'));
+    }
+
 }
