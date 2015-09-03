@@ -58,4 +58,24 @@ Route::group(['as' => 'authentication::'], function () {
         'uses' => 'Speelpenning\Authentication\Http\Controllers\PasswordController@update'
     ]);
 
+    /*
+     * Password reset routes
+     */
+    Route::get('reset-your-password', [
+        'as' => 'password-reset.create',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\PasswordResetController@create'
+    ]);
+    Route::post('reset-your-password', [
+        'as' => 'password-reset.store',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\PasswordResetController@store'
+    ]);
+    Route::get('reset-your-password/{token}', [
+        'as' => 'password-reset.edit',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\PasswordResetController@edit'
+    ]);
+    Route::patch('reset-your-password', [
+        'as' => 'password-reset.update',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\PasswordResetController@update'
+    ]);
+
 });

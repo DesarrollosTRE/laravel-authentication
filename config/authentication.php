@@ -11,13 +11,14 @@ return [
     'enableRoutes' => env('AUTH_ENABLE_ROUTES', false),
 
     /*
-     * Parent view
+     * Parent view and e-mail view
      *
      * The views that come with the package extend a basic Bootstrap master view, but my best guess is that you like
-     * something fancier than a plain white page with a registration form. You can override the parent view by
-     * setting the name of your view here.
+     * something fancier than a plain white page with a registration form. You can override the parent and e-mail
+     * view by setting the name of your view here.
      */
     'parentView' => env('AUTH_PARENT_VIEW', 'authentication::app'),
+    'emailView' => env('AUTH_EMAIL_VIEW', 'authentication::email'),
 
     /*
      * Registration options
@@ -54,6 +55,36 @@ return [
          * Minimum password length (in characters)
          */
         'minLength' => env('AUTH_PASSWORD_MIN_LENGTH', 8),
+
+    ],
+
+    /*
+     * Password reset options
+     */
+    'passwordReset' => [
+
+        /*
+         * E-mail view
+         *
+         * Set the name of your e-mail here to override the package's default view.
+         */
+        'email' => env('AUTH_PASSWORD_RESET_EMAIL', 'authentication::emails.password-reset'),
+
+        /*
+         * Sender details
+         *
+         *      email   The e-mail address that is used for sending reset tokens.
+         *      name    The name that is used as sender.
+         */
+        'from' => [
+            'email' => env('AUTH_PASSWORD_RESET_FROM_EMAIL', config('mail.from.address')),
+            'name' => env('AUTH_PASSWORD_RESET_FROM_ADDRESS', config('mail.from.name')),
+        ],
+
+        /*
+         * Expire time (in minutes)
+         */
+        'expiresAfter' => env('AUTH_PASSWORD_RESET_EXPIRES_AFTER', config('auth.password.expire')),
 
     ],
 

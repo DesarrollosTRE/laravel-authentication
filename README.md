@@ -60,6 +60,7 @@ For this, I recommend you to read the configuration section below. When you have
 
 ```php
 Speelpenning\Authentication\Events\PasswordWasChanged
+Speelpenning\Authentication\Events\PasswordWasReset
 Speelpenning\Authentication\Events\UserHasLoggedIn
 Speelpenning\Authentication\Events\UserHasLoggedOut
 Speelpenning\Authentication\Events\UserHasLoginHasFailed
@@ -81,7 +82,7 @@ AUTH_ENABLE_ROUTES=[true|false]
 ```
 Default value: false
 
-### Parent view
+### Parent and e-mail view
 
 The package comes with a plain white bootstrap parent view. Maybe that satisfies the needs for a backend application, but if you are not very much charmed by that, change it with the following line:
 
@@ -89,8 +90,11 @@ The package comes with a plain white bootstrap parent view. Maybe that satisfies
 AUTH_PARENT_VIEW=<view-name>
 ```
 Default value: authentication::app
-
 Each view fills two sections: title and content.
+
+```ini
+AUTH_EMAIL_VIEW=<view-name>
+```
 
 ### Registration options
 
