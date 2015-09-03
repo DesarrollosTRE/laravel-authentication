@@ -15,5 +15,6 @@ return [
     // Messages
     'created'               => 'A password reset link has been e-mailed to you.',
     'expired'               => 'This token has expired. Please make a request for a new password reset link.',
+    'updated'               => 'Your password is succesfully reset. You may login with your new password now.',
 
 ];
