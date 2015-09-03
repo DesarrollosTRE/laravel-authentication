@@ -5,8 +5,11 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Contracts\Mail\Mailer;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Mail\Message;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Speelpenning\Authentication\Events\PasswordResetLinkWasSent;
@@ -15,7 +18,9 @@ use Speelpenning\Authentication\PasswordReset;
 use Speelpenning\Authentication\Repositories\PasswordResetRepository;
 use Speelpenning\Authentication\Repositories\UserRepository;
 
-class SendPasswordResetLink implements SelfHandling {
+class SendPasswordResetLink implements SelfHandling, ShouldQueue {
+
+    use InteractsWithQueue, SerializesModels;
 
     /**
      * @var string

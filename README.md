@@ -182,6 +182,15 @@ AUTH_PASSWORD_RESET_FROM_NAME=<sender-name>
 ```
 Default value: config('mail.from.name')
 
+#### Subject
+
+You may overrule the translation entry for the e-mail subject like so:
+
+```ini
+AUTH_PASSWORD_RESET_SUBJECT=<key>
+```
+Default value: authentication::password-reset.subject
+
 #### Token expire time (in minutes)
 
 By default Laravel's auth password expire is used.

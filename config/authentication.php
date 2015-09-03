@@ -124,6 +124,13 @@ return [
             'name' => env('AUTH_PASSWORD_RESET_FROM_NAME', config('mail.from.name')),
         ],
 
+        /**
+         * Subject
+         *
+         *
+         */
+        'subject' => env('AUTH_PASSWORD_RESET_SUBJECT', 'authentication::password-reset.subject'),
+
         /*
          * Expire time (in minutes)
          */
