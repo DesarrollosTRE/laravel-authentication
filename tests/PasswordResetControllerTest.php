@@ -33,7 +33,7 @@ class PasswordResetControllerTest extends TestCase {
      */
     protected function generateReset()
     {
-        $reset = PasswordReset::generate($this->user->email);
+        $reset = PasswordReset::generate($this->user);
         app(PasswordResetRepository::class)->save($reset);
         return $reset;
     }
@@ -72,8 +72,8 @@ class PasswordResetControllerTest extends TestCase {
     {
         $reset = $this->generateReset();
 
-        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->token]))
-            ->seeInField('token', $reset->token)
+        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->getToken()]))
+            ->seeInField('token', $reset->getToken())
             ->see(trans('authentication::user.email'))
             ->see(trans('authentication::user.password'))
             ->see(trans('authentication::user.password_confirmation'))
@@ -84,7 +84,7 @@ class PasswordResetControllerTest extends TestCase {
     {
         $reset = $this->generateReset();
 
-        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->token]))
+        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->getToken()]))
             ->type($this->user->email, 'email')
             ->type('some-new-password', 'password')
             ->type('some-new-password', 'password_confirmation')
@@ -97,7 +97,7 @@ class PasswordResetControllerTest extends TestCase {
     {
         $reset = $this->generateReset();
 
-        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->token]))
+        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->getToken()]))
             ->press(trans('authentication::password-reset.edit'))
             ->see('The email field is required.')
             ->see('The password field is required.');
@@ -107,7 +107,7 @@ class PasswordResetControllerTest extends TestCase {
     {
         $reset = $this->generateReset();
 
-        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->token]))
+        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->getToken()]))
             ->type('not@existing.user', 'email')
             ->press(trans('authentication::password-reset.edit'))
             ->see('The selected email is invalid.');
@@ -117,7 +117,7 @@ class PasswordResetControllerTest extends TestCase {
     {
         $reset = $this->generateReset();
 
-        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->token]))
+        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->getToken()]))
             ->type($this->user->email, 'email')
             ->type('some-new-password', 'password')
             ->press(trans('authentication::password-reset.edit'))
@@ -128,7 +128,7 @@ class PasswordResetControllerTest extends TestCase {
     {
         $reset = $this->generateReset();
 
-        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->token]))
+        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->getToken()]))
             ->type($this->user->email, 'email')
             ->type('short', 'password')
             ->type('short', 'password_confirmation')
@@ -141,7 +141,7 @@ class PasswordResetControllerTest extends TestCase {
         config(['authentication.passwordReset.expiresAfter' => -60]);
         $reset = $this->generateReset();
 
-        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->token]))
+        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->getToken()]))
             ->seePageIs(route('authentication::password-reset.create'))
             ->see(trans('authentication::password-reset.expired'));
     }
@@ -150,7 +150,7 @@ class PasswordResetControllerTest extends TestCase {
     {
         $reset = $this->generateReset();
 
-        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->token]))
+        $this->visit(route('authentication::password-reset.edit', ['token' => $reset->getToken()]))
             ->type($this->user->email, 'email')
             ->type('some-new-password', 'password')
             ->type('some-new-password', 'password_confirmation');

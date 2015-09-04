@@ -1,10 +1,11 @@
 <?php namespace Speelpenning\Authentication\Http\Controllers;
 
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\View\View;
 use Speelpenning\Authentication\Exceptions\LoginFailed;
 use Speelpenning\Authentication\Exceptions\RememberingUserFailed;
 use Speelpenning\Authentication\Exceptions\SessionHasExpired;
@@ -23,6 +24,7 @@ class SessionController extends Controller {
 
     /**
      * SessionController constructor.
+     *
      * @param Repository $config
      */
     public function __construct(Repository $config)
@@ -30,6 +32,11 @@ class SessionController extends Controller {
         $this->config = $config;
     }
 
+    /**
+     * Attempts to authenticate by remember token. When remembering fails the login form is shown.
+     *
+     * @return RedirectResponse|View
+     */
     public function create()
     {
         try {
@@ -41,6 +48,12 @@ class SessionController extends Controller {
         }
     }
 
+    /**
+     * Attempts to login the user.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request)
     {
         try {
@@ -54,6 +67,11 @@ class SessionController extends Controller {
         }
     }
 
+    /**
+     * Attempts to log off the user.
+     *
+     * @return RedirectResponse
+     */
     public function destroy()
     {
         try {

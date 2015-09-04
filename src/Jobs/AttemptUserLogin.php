@@ -2,7 +2,7 @@
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Events\Dispatcher;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Translation\Translator;
 use Speelpenning\Authentication\Events\UserHasLoggedIn;
 use Speelpenning\Authentication\Events\UserLoginHasFailed;

@@ -23,7 +23,7 @@ class UpdateUserRequest extends FormRequest {
     {
         return [
             'name'      => $this->getUserNameRules(),
-            'email'     => ['required', 'email', 'unique:users,email,' . auth()->user()->id],
+            'email'     => ['required', 'email', 'unique:users,email,' . auth()->user()->getAuthIdentifier()],
         ];
     }
 

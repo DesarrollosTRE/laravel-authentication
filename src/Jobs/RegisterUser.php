@@ -27,7 +27,7 @@ class RegisterUser implements SelfHandling {
     /**
      * Create a new job instance.
      *
-     * @param string $name
+     * @param null|string $name
      * @param string $email
      * @param string $password
      */
@@ -54,4 +54,5 @@ class RegisterUser implements SelfHandling {
 
         $event->fire(new UserWasRegistered($user));
     }
+
 }

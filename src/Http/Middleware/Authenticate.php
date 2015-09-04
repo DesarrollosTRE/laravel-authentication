@@ -13,6 +13,7 @@ class Authenticate {
 
     /**
      * Authenticate constructor.
+     *
      * @param Guard $auth
      */
     public function __construct(Guard $auth)

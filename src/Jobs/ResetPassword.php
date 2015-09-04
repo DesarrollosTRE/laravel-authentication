@@ -61,4 +61,5 @@ class ResetPassword implements SelfHandling {
 
         $event->fire(new PasswordWasReset($user));
     }
+
 }

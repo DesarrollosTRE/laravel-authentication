@@ -2,8 +2,8 @@
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SendPasswordResetLinkRequest extends FormRequest
-{
+class SendPasswordResetLinkRequest extends FormRequest {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,4 +25,5 @@ class SendPasswordResetLinkRequest extends FormRequest
             'email' => ['required', 'email', 'exists:users'],
         ];
     }
+
 }

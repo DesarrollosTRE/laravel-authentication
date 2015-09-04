@@ -45,16 +45,16 @@ class ChangePassword implements SelfHandling {
      * @param Hasher $hash
      * @param UserRepository $users
      * @param Dispatcher $event
+     * @param MessageBag $messages
      * @return void
      */
-    public function handle(Hasher $hash, UserRepository $users, Dispatcher $event)
+    public function handle(Hasher $hash, UserRepository $users, Dispatcher $event, MessageBag $messages)
     {
         $user = $users->find($this->id);
 
         if ( ! $hash->check($this->current_password, $user->password)) {
-            throw new ValidationException(new MessageBag([
-                'current_password' => trans('authentication::password.current_password_invalid'),
-            ]));
+            $messages->add('current_password', trans('authentication::password.current_password_invalid'));
+            throw new ValidationException($messages);
         }
 
         $user->password = $hash->make($this->new_password);
@@ -63,4 +63,5 @@ class ChangePassword implements SelfHandling {
 
         $event->fire(new PasswordWasChanged($user));
     }
+
 }

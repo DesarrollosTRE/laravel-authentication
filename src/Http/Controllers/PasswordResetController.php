@@ -1,8 +1,9 @@
 <?php namespace Speelpenning\Authentication\Http\Controllers;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\View\View;
 use Speelpenning\Authentication\Exceptions\TokenHasExpired;
 use Speelpenning\Authentication\Http\Requests\SendPasswordResetLinkRequest;
 use Speelpenning\Authentication\Http\Requests\ResetPasswordRequest;
@@ -15,17 +16,21 @@ class PasswordResetController extends Controller {
     use DispatchesJobs;
 
     /**
-     * PasswordController constructor.
+     * Displays the request reset password link form.
+     *
+     * @return View
      */
-    public function __construct()
-    {
-    }
-
     public function create()
     {
         return view('authentication::password-reset.create');
     }
 
+    /**
+     * Attempts to send the password reset link to the user.
+     *
+     * @param SendPasswordResetLinkRequest $request
+     * @return RedirectResponse
+     */
     public function store(SendPasswordResetLinkRequest $request)
     {
         $this->dispatchFrom(SendPasswordResetLink::class, $request);
@@ -35,6 +40,13 @@ class PasswordResetController extends Controller {
         ]);
     }
 
+    /**
+     * Shows the password reset form.
+     *
+     * @param string $token
+     * @param PasswordResetRepository $resets
+     * @return View|RedirectResponse
+     */
     public function edit($token, PasswordResetRepository $resets)
     {
         if ($resets->exists($token)) {
@@ -47,6 +59,12 @@ class PasswordResetController extends Controller {
         }
     }
 
+    /**
+     * Attempts to reset the password.
+     *
+     * @param ResetPasswordRequest $request
+     * @return RedirectResponse
+     */
     public function update(ResetPasswordRequest $request)
     {
         try {

@@ -26,7 +26,7 @@ class UpdateUser implements SelfHandling {
      * Create a new job instance.
      *
      * @param int $id
-     * @param string $name
+     * @param null|string $name
      * @param string $email
      */
     public function __construct($id, $name = null, $email)

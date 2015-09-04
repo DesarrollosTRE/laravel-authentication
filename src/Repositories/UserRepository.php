@@ -1,10 +1,11 @@
 <?php namespace Speelpenning\Authentication\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Speelpenning\Authentication\User;
+use Speelpenning\Contracts\Authentication\Repositories\UserRepository as UserRepositoryContract;
 
-class UserRepository {
+class UserRepository implements UserRepositoryContract {
 
     /**
      * Checks if a user with a specific e-mail address exists in the database.
@@ -44,10 +45,10 @@ class UserRepository {
     /**
      * Saves the model to the database.
      *
-     * @param Model $model
+     * @param Authenticatable $model
      * @return bool
      */
-    public function save(Model $model)
+    public function save(Authenticatable $model)
     {
         return $model->save();
     }
