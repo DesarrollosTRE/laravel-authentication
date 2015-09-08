@@ -4,8 +4,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Hashing\Hasher;
 use Speelpenning\Authentication\Events\UserWasRegistered;
-use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\User;
+use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
 class RegisterUser implements SelfHandling {
 

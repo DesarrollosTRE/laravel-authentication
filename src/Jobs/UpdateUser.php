@@ -3,7 +3,7 @@
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Speelpenning\Authentication\Events\UserWasUpdated;
-use Speelpenning\Authentication\Repositories\UserRepository;
+use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
 class UpdateUser implements SelfHandling {
 

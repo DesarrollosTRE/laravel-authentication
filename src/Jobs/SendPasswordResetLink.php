@@ -10,8 +10,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Speelpenning\Authentication\Events\PasswordResetLinkWasSent;
 use Speelpenning\Authentication\PasswordReset;
-use Speelpenning\Authentication\Repositories\PasswordResetRepository;
-use Speelpenning\Authentication\Repositories\UserRepository;
+use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository;
+use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
 class SendPasswordResetLink implements SelfHandling, ShouldQueue {
 

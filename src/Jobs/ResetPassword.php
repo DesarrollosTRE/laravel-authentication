@@ -5,8 +5,8 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Hashing\Hasher;
 use Speelpenning\Authentication\Events\PasswordWasReset;
 use Speelpenning\Authentication\Exceptions\TokenHasExpired;
-use Speelpenning\Authentication\Repositories\PasswordResetRepository;
-use Speelpenning\Authentication\Repositories\UserRepository;
+use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository;
+use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
 class ResetPassword implements SelfHandling {
 

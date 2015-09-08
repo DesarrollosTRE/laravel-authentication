@@ -9,7 +9,7 @@ use Speelpenning\Authentication\Http\Requests\SendPasswordResetLinkRequest;
 use Speelpenning\Authentication\Http\Requests\ResetPasswordRequest;
 use Speelpenning\Authentication\Jobs\ResetPassword;
 use Speelpenning\Authentication\Jobs\SendPasswordResetLink;
-use Speelpenning\Authentication\Repositories\PasswordResetRepository;
+use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository;
 
 class PasswordResetController extends Controller {
 

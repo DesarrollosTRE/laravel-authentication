@@ -3,8 +3,6 @@
 use Illuminate\Support\ServiceProvider;
 use Speelpenning\Authentication\Repositories\PasswordResetRepository;
 use Speelpenning\Authentication\Repositories\UserRepository;
-use Speelpenning\Contracts\Authentication\CanRegister;
-use Speelpenning\Contracts\Authentication\ExpirableToken;
 use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository as PasswordResetRepositoryContract;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository as UserRepositoryContract;
 
@@ -34,7 +32,7 @@ class AuthenticationServiceProvider extends ServiceProvider {
             return new PasswordResetRepository($app['config']);
         });
 
-        $this->app->singleton(UserRepositoryContract::class, function ($app) {
+        $this->app->singleton(UserRepositoryContract::class, function () {
             return new UserRepository();
         });
     }
