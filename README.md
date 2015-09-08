@@ -113,6 +113,18 @@ Default value: authentication::email
 
 ### Registration options
 
+#### Allow or disallow public registration
+
+```ini
+AUTH_REGISTRATION_ALLOW_PUBLIC=[true|false]
+```
+Default value: true
+
+> When disallowing public registration, users can ben registered with
+```bash
+php artisan user:register <email> [<name>] [--with-reset]
+```
+
 #### User's name field
 
 This option switches the user's name field on, off or makes it a required field.

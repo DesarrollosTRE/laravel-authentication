@@ -131,4 +131,12 @@ class UserControllerTest extends TestCase {
             ->seeInField('email', $this->user->email);
     }
 
+    public function testClosedRegistration()
+    {
+        config(['authentication.registration.allowPublic' => 'false']);
+
+        $this->get(route('authentication::user.create'))
+            ->assertResponseStatus(403);
+    }
+
 }

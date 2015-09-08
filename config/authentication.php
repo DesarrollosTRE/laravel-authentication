@@ -26,6 +26,15 @@ return [
     'registration' => [
 
         /*
+         * Allow public registration.
+         *
+         * By default, this package will allow public registration. If you need to control who registers with your
+         * application, set this option to false. When disallowing public registration, users can only be created
+         * with the console command user:register.
+         */
+        'allowPublic' => env('AUTH_REGISTRATION_ALLOW_PUBLIC', 'true'),
+
+        /*
          * User name
          *
          * By default the user's name field is shown, but not required. You can change the default behaviour to:

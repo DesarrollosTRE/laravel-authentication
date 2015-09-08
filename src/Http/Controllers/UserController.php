@@ -5,6 +5,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
+use Speelpenning\Authentication\Http\Requests\CreateUserRequest;
 use Speelpenning\Authentication\Http\Requests\StoreUserRequest;
 use Speelpenning\Authentication\Jobs\RegisterUser;
 
@@ -15,9 +16,10 @@ class UserController extends Controller {
     /**
      * Shows the registration form.
      *
+     * @param CreateUserRequest $request
      * @return View
      */
-    public function create()
+    public function create(CreateUserRequest $request)
     {
         return view('authentication::user.create');
     }
