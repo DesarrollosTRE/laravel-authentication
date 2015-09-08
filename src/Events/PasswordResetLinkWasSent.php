@@ -1,23 +1,23 @@
 <?php namespace Speelpenning\Authentication\Events;
 
 use Illuminate\Queue\SerializesModels;
-use Speelpenning\Authentication\PasswordReset;
+use Speelpenning\Contracts\Authentication\ExpirableToken;
 
 class PasswordResetLinkWasSent {
 
     use SerializesModels;
 
     /**
-     * @var PasswordReset
+     * @var ExpirableToken
      */
     public $passwordReset;
 
     /**
      * Create a new event instance.
      *
-     * @param PasswordReset $passwordReset
+     * @param ExpirableToken $passwordReset
      */
-    public function __construct(PasswordReset $passwordReset)
+    public function __construct(ExpirableToken $passwordReset)
     {
         $this->passwordReset = $passwordReset;
     }

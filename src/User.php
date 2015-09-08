@@ -3,9 +3,9 @@
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
+use Speelpenning\Contracts\Authentication\CanRegister;
 
-class User extends Model implements AuthenticatableContract
-{
+class User extends Model implements AuthenticatableContract, CanRegister {
 
     use Authenticatable;
 
@@ -36,7 +36,7 @@ class User extends Model implements AuthenticatableContract
      * @param null|string $name
      * @param string $email
      * @param string $password
-     * @return static
+     * @return User
      */
     public static function register($name = null, $email, $password)
     {

@@ -20,15 +20,10 @@
                     <p class="form-control-static">{{ $user->email }}</p>
                 </div>
 
-                <div class="form-group text-center">
-                    <a href="{{ route('authentication::profile.edit') }}" class="btn btn-primary">
-                        {{ trans('authentication::profile.edit') }}
-                    </a>
-                </div>
-
                 <hr>
 
                 <ul class="list-inline">
+                    <li><a href="{{ route('authentication::profile.edit') }}">{{ trans('authentication::profile.edit') }}</a></li>
                     <li><a href="{{ route('authentication::password.edit') }}">{{ trans('authentication::password.edit') }}</a></li>
                     <li><a href="{{ route('authentication::session.destroy') }}">{{ trans('authentication::session.destroy') }}</a></li>
                 </ul>

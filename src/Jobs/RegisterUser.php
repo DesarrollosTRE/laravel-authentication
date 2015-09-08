@@ -4,8 +4,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Hashing\Hasher;
 use Speelpenning\Authentication\Events\UserWasRegistered;
-use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\User;
+use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
 class RegisterUser implements SelfHandling {
 
@@ -27,7 +27,7 @@ class RegisterUser implements SelfHandling {
     /**
      * Create a new job instance.
      *
-     * @param string $name
+     * @param null|string $name
      * @param string $email
      * @param string $password
      */
@@ -54,4 +54,5 @@ class RegisterUser implements SelfHandling {
 
         $event->fire(new UserWasRegistered($user));
     }
+
 }

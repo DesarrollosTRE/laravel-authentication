@@ -1,23 +1,23 @@
 <?php namespace Speelpenning\Authentication\Events;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Queue\SerializesModels;
-use Speelpenning\Authentication\User;
 
 class PasswordWasReset {
 
     use SerializesModels;
 
     /**
-     * @var User
+     * @var Authenticatable
      */
     public $user;
 
     /**
      * Create a new event instance.
      *
-     * @param User $user
+     * @param Authenticatable $user
      */
-    public function __construct(User $user)
+    public function __construct(Authenticatable $user)
     {
         $this->user = $user;
     }

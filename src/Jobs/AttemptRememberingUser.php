@@ -2,7 +2,7 @@
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Bus\SelfHandling;
-use Illuminate\Events\Dispatcher;
+use Illuminate\Contracts\Events\Dispatcher;
 use Speelpenning\Authentication\Events\UserWasRemembered;
 use Speelpenning\Authentication\Exceptions\RememberingUserFailed;
 

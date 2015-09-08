@@ -1,10 +1,12 @@
 <?php namespace Speelpenning\Authentication;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Speelpenning\Contracts\Authentication\ExpirableToken;
 
-class PasswordReset extends Model {
+class PasswordReset extends Model implements ExpirableToken {
 
     protected $table = 'password_resets';
 
@@ -15,16 +17,26 @@ class PasswordReset extends Model {
     /**
      * Generates a new password token.
      *
-     * @param string $email
-     * @return static
+     * @param Authenticatable $user
+     * @return PasswordReset
      */
-    public static function generate($email)
+    public static function generate(Authenticatable $user)
     {
         return new static([
-            'email' => $email,
+            'email' => $user->email,
             'token' => hash_hmac('sha256', Str::random(40), config('app.key')),
             'created_at' => Carbon::now(),
         ]);
+    }
+
+    /**
+     * Returns the reset token.
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 
     /**

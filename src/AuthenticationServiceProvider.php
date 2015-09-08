@@ -1,6 +1,10 @@
 <?php namespace Speelpenning\Authentication;
 
 use Illuminate\Support\ServiceProvider;
+use Speelpenning\Authentication\Repositories\PasswordResetRepository;
+use Speelpenning\Authentication\Repositories\UserRepository;
+use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository as PasswordResetRepositoryContract;
+use Speelpenning\Contracts\Authentication\Repositories\UserRepository as UserRepositoryContract;
 
 class AuthenticationServiceProvider extends ServiceProvider {
 
@@ -23,5 +27,13 @@ class AuthenticationServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/authentication.php', 'authentication');
+
+        $this->app->singleton(PasswordResetRepositoryContract::class, function ($app) {
+            return new PasswordResetRepository($app['config']);
+        });
+
+        $this->app->singleton(UserRepositoryContract::class, function () {
+            return new UserRepository();
+        });
     }
 }

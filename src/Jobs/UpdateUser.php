@@ -3,7 +3,7 @@
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Speelpenning\Authentication\Events\UserWasUpdated;
-use Speelpenning\Authentication\Repositories\UserRepository;
+use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
 class UpdateUser implements SelfHandling {
 
@@ -26,7 +26,7 @@ class UpdateUser implements SelfHandling {
      * Create a new job instance.
      *
      * @param int $id
-     * @param string $name
+     * @param null|string $name
      * @param string $email
      */
     public function __construct($id, $name = null, $email)
