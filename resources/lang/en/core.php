@@ -2,11 +2,9 @@
 
 return [
 
-    // Labels
+    /*
+     * Labels
+     */
     'cancel'                => 'Cancel',
-
-    // Actions
-
-    // Messages
 
 ];

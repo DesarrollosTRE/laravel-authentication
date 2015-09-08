@@ -25,4 +25,11 @@ return [
     'created'               => 'Your account was created successfully. Thank you for registering with us!',
     'creation_failed'       => 'We were not able to complete your registration. Please check your input and try again.',
 
+    /*
+     * Console
+     */
+    'console' => [
+        'created'           => 'User registered with the following password: :password',
+    ],
+
 ];
