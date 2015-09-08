@@ -54,20 +54,34 @@ class User extends BaseUser
 }
 ```
 
+### Routes
+
+Route name                            | Description
+------------------------------------- | ---------------------------------------------------------
+authentication::user.create           | Displays the registration form
+authentication::session.create        | Displays the login form
+authentication::profile.show          | Displays the user's profile
+authentication::session.destroy       | Performs a user logout (shown on profile.show)
+authentication::profile.edit          | Displays the edit profile form (shown on profile.show)
+authentication::password.edit         | Displays the change password form (shown on profile.show)
+authentication::password-reset.create | Displays the form for requesting a password reset link
+
+> All routes have a translation entry equal to the route name, e.g. trans('authentication::user.create').
+
 ### Integration in your app
 
 For this, I recommend you to read the configuration section below. When you have a configuration that satisfies your needs, you may add some listeners to the following events:
 
 ```php
-Speelpenning\Authentication\Events\PasswordResetLinkWasSent
-Speelpenning\Authentication\Events\PasswordWasChanged
-Speelpenning\Authentication\Events\PasswordWasReset
-Speelpenning\Authentication\Events\UserHasLoggedIn
-Speelpenning\Authentication\Events\UserHasLoggedOut
-Speelpenning\Authentication\Events\UserHasLoginHasFailed
-Speelpenning\Authentication\Events\UserWasRegistered
-Speelpenning\Authentication\Events\UserWasRemembered
-Speelpenning\Authentication\Events\UserWasUpdated
+Speelpenning\Authentication\Events\PasswordResetLinkWasSent::class
+Speelpenning\Authentication\Events\PasswordWasChanged::class
+Speelpenning\Authentication\Events\PasswordWasReset::class
+Speelpenning\Authentication\Events\UserHasLoggedIn::class
+Speelpenning\Authentication\Events\UserHasLoggedOut::class
+Speelpenning\Authentication\Events\UserHasLoginHasFailed::class
+Speelpenning\Authentication\Events\UserWasRegistered::class
+Speelpenning\Authentication\Events\UserWasRemembered::class
+Speelpenning\Authentication\Events\UserWasUpdated::class
 ```
 
 ## Configuration
@@ -85,7 +99,7 @@ Default value: false
 
 ### Parent and e-mail view
 
-The package comes with a plain white bootstrap parent view. Maybe that satisfies the needs for a backend application, but if you are not very much charmed by that, change it with the following line:
+The package comes with a plain white bootstrap parent view. Maybe that satisfies your needs, but if you are not very much charmed by that, change it with the following line:
 
 ```ini
 AUTH_PARENT_VIEW=<view-name>
@@ -170,8 +184,6 @@ Default value: authentication::emails.password-reset
 
 #### Sender details
 
-Configure these sender details if you want them to be different from the global mail configuration. 
-
 ```ini
 AUTH_PASSWORD_RESET_FROM_EMAIL=<email-address>
 ```
@@ -184,16 +196,12 @@ Default value: config('mail.from.name')
 
 #### Subject
 
-You may overrule the translation entry for the e-mail subject like so:
-
 ```ini
 AUTH_PASSWORD_RESET_SUBJECT=<key>
 ```
 Default value: authentication::password-reset.subject
 
 #### Token expire time (in minutes)
-
-By default Laravel's auth password expire is used.
 
 ```ini
 AUTH_PASSWORD_RESET_EXPIRES_AFTER=<minutes>
