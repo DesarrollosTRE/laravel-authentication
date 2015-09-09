@@ -4,8 +4,9 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Speelpenning\Contracts\Authentication\CanRegister;
+use Speelpenning\Contracts\Authentication\ManagesUsers;
 
-class User extends Model implements AuthenticatableContract, CanRegister {
+class User extends Model implements AuthenticatableContract, CanRegister, ManagesUsers {
 
     use Authenticatable;
 
@@ -41,6 +42,26 @@ class User extends Model implements AuthenticatableContract, CanRegister {
     public static function register($name = null, $email, $password)
     {
         return new static(compact('name', 'email', 'password'));
+    }
+
+    /**
+     * Indicates if managing users is allowed.
+     *
+     * @return bool
+     */
+    public function managesUsers()
+    {
+        return (bool)$this->{$this->managesUsersIndicator()};
+    }
+
+    /**
+     * Returns the field name of the manages users indicator.
+     *
+     * @return string
+     */
+    public function managesUsersIndicator()
+    {
+        return 'admin';
     }
 
 }

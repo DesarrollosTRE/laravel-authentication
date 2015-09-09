@@ -24,9 +24,15 @@ composer require speelpenning/laravel-authentication
 ```
 
 Add the service provider to app.php:
- 
+
 ```php
 Speelpenning\Authentication\AuthenticationServiceProvider::class,
+```
+
+Publish and run the database migrations by executing:
+
+```bash
+php artisan vendor:publish && php artisan migrate
 ```
 
 ### The user model
@@ -84,6 +90,22 @@ Speelpenning\Authentication\Events\UserWasRemembered::class
 Speelpenning\Authentication\Events\UserWasUpdated::class
 ```
 
+## Usage
+
+### Registering a user by command line
+
+Users can be registered with the command below. When public registration is disabled, this is the only option to register users with your application. 
+```bash
+php artisan user:register <email> [<name>] [--with-reset]
+```
+
+### Administrator privileges
+
+Administrators are able to use the user administration features. You may grant or revoke administrator privileges with the following command:
+```bash
+php artisan user:admin <email> [--revoke]
+```
+
 ## Configuration
 
 To avoid publishing the config, all configuration can be done through the .env file.
@@ -119,11 +141,6 @@ Default value: authentication::email
 AUTH_REGISTRATION_ALLOW_PUBLIC=[true|false]
 ```
 Default value: true
-
-> When disallowing public registration, users can ben registered with
-```bash
-php artisan user:register <email> [<name>] [--with-reset]
-```
 
 #### User's name field
 
