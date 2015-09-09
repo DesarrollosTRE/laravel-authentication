@@ -7,6 +7,7 @@ use Illuminate\Translation\Translator;
 use Speelpenning\Authentication\Events\UserHasLoggedIn;
 use Speelpenning\Authentication\Events\UserLoginHasFailed;
 use Speelpenning\Authentication\Exceptions\LoginFailed;
+use Speelpenning\Authentication\Exceptions\UserIsBanned;
 
 class AttemptUserLogin implements SelfHandling {
 
@@ -44,6 +45,8 @@ class AttemptUserLogin implements SelfHandling {
      * @param Dispatcher $event
      * @param Translator $translator
      * @return void
+     * @throws LoginFailed
+     * @throws UserIsBanned
      */
     public function handle(Guard $auth, Dispatcher $event, Translator $translator)
     {
@@ -52,7 +55,13 @@ class AttemptUserLogin implements SelfHandling {
             throw new LoginFailed($translator->get('authentication::session.creation_failed'));
         }
 
-        $event->fire(new UserHasLoggedIn($auth->user()));
+        $user = $auth->user();
+        if ($user->isBanned()) {
+            $auth->logout();
+            throw new UserIsBanned($translator->get('authentication::user.banned', ['email' => $user->email]));
+        }
+
+        $event->fire(new UserHasLoggedIn($user));
     }
 
 }

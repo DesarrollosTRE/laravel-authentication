@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use Speelpenning\Authentication\Exceptions\LoginFailed;
 use Speelpenning\Authentication\Exceptions\RememberingUserFailed;
 use Speelpenning\Authentication\Exceptions\SessionHasExpired;
+use Speelpenning\Authentication\Exceptions\UserIsBanned;
 use Speelpenning\Authentication\Jobs\AttemptRememberingUser;
 use Speelpenning\Authentication\Jobs\AttemptUserLogin;
 use Speelpenning\Authentication\Jobs\PerformUserLogout;
@@ -61,6 +62,11 @@ class SessionController extends Controller {
             return redirect()->intended($this->config->get('authentication.login.redirectUri'));
         }
         catch (LoginFailed $e) {
+            return redirect()->back()->withInput()->withErrors([
+                'authentication::login_error' => $e->getMessage()
+            ]);
+        }
+        catch (UserIsBanned $e) {
             return redirect()->back()->withInput()->withErrors([
                 'authentication::login_error' => $e->getMessage()
             ]);
