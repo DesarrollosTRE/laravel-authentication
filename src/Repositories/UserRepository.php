@@ -1,7 +1,7 @@
 <?php namespace Speelpenning\Authentication\Repositories;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Speelpenning\Authentication\User;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository as UserRepositoryContract;
@@ -47,7 +47,7 @@ class UserRepository implements UserRepositoryContract {
      * Queries the repository and returns a paginated result.
      *
      * @param null|string $q
-     * @return Paginator
+     * @return LengthAwarePaginator
      */
     public function query($q = null)
     {
