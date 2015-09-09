@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Support\Facades\Artisan;
 use Speelpenning\Authentication\Jobs\RegisterUser;
 use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\User;

@@ -34,7 +34,7 @@ class UserControllerTest extends TestCase {
         config(['authentication.registration.userName' => 'off']);
 
         $this->visit(route('authentication::user.create'))
-            ->dontSee(trans('authentication::user.name'));
+            ->dontSee('<label for="name">' . trans('authentication::user.name') . '</label>');
     }
 
     public function testUserNameCanBeRequired()
