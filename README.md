@@ -102,7 +102,7 @@ Default value: false
 The package comes with a plain white bootstrap parent view. Maybe that satisfies your needs, but if you are not very much charmed by that, change it with the following line:
 
 ```ini
-AUTH_PARENT_VIEW=<view-name>
+AUTH_APP_VIEW=<view-name>
 ```
 Default value: authentication::app
 
