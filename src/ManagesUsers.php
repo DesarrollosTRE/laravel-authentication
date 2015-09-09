@@ -12,4 +12,14 @@ trait ManagesUsers {
         return (bool)$this->{$this->managesUsersIndicator()};
     }
 
+    /**
+     * Returns the field name of the manages users indicator.
+     *
+     * @return string
+     */
+    public function managesUsersIndicator()
+    {
+        return 'admin';
+    }
+
 }

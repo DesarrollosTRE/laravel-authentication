@@ -17,7 +17,7 @@
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    <td>{{ $user->email }}</td>
+                    <td><a href="{{ route('authentication::user.show', $user->id) }}">{{ $user->email }}</a></td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->created_at }}</td>
                     <td>{!! $user->managesUsers() ? '<i class="glyphicon glyphicon-ok"></i>' : '' !!}</td>

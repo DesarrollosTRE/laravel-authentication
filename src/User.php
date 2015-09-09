@@ -1,14 +1,16 @@
 <?php namespace Speelpenning\Authentication;
 
+use DateTime;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
+use Speelpenning\Contracts\Authentication\CanBeBanned as CanBeBannedContract;
 use Speelpenning\Contracts\Authentication\CanRegister as CanRegisterContract;
 use Speelpenning\Contracts\Authentication\ManagesUsers as ManagesUsersContract;
 
-class User extends Model implements AuthenticatableContract, CanRegisterContract, ManagesUsersContract {
+class User extends Model implements AuthenticatableContract, CanBeBannedContract, CanRegisterContract, ManagesUsersContract {
 
-    use Authenticatable, CanRegister, ManagesUsers;
+    use Authenticatable, CanBeBanned, CanRegister, ManagesUsers;
 
     /**
      * The database table used by the model.
@@ -30,15 +32,5 @@ class User extends Model implements AuthenticatableContract, CanRegisterContract
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-
-    /**
-     * Returns the field name of the manages users indicator.
-     *
-     * @return string
-     */
-    public function managesUsersIndicator()
-    {
-        return 'admin';
-    }
 
 }

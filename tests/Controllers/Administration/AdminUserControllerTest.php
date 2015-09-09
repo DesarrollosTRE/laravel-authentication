@@ -41,7 +41,7 @@ class AdminUserControllerTest extends TestCase {
     public function testUserIndex()
     {
         $this->login()
-            ->visit(route('authentication::admin.user.index'))
+            ->visit(route('authentication::user.index'))
             ->see(trans('authentication::user.index'))
             ->see(trans('authentication::user.email'))
             ->see(trans('authentication::user.name'))
@@ -50,6 +50,34 @@ class AdminUserControllerTest extends TestCase {
             ->see('John Doe')
             ->see('John Doe Sr.')
             ->see('Another User');
+    }
+
+    public function testUserDetails()
+    {
+        $this->login()
+            ->visit(route('authentication::user.index'))
+            ->click($this->user->email)
+            ->see(trans('authentication::user.show'))
+            ->see(trans('authentication::user.email'))
+            ->see($this->user->email)
+            ->see(trans('authentication::user.name'))
+            ->see($this->user->name)
+            ->see(trans('authentication::user.created_at'))
+            ->see($this->user->created_at)
+            ->see(trans('authentication::user.administrator'))
+            ->see(trans('authentication::user.index'));
+    }
+
+    public function testUserCanBeBannedAndUnbanned()
+    {
+        $this->login()
+            ->visit(route('authentication::user.index'))
+            ->click('another.user@example.com')
+            ->see(trans('authentication::user.ban'))
+            ->press(trans('authentication::user.ban'))
+            ->see(trans('authentication::user.unban'))
+            ->press(trans('authentication::user.unban'))
+            ->see(trans('authentication::user.ban'));
     }
 
 }

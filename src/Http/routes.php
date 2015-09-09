@@ -82,8 +82,20 @@ Route::group(['as' => 'authentication::'], function () {
      * User administration routes
      */
     Route::get('admin/user', [
-        'as' => 'admin.user.index',
+        'as' => 'user.index',
         'uses' => 'Speelpenning\Authentication\Http\Controllers\Administration\UserController@index'
+    ]);
+    Route::get('admin/user/{id}', [
+        'as' => 'user.show',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\Administration\UserController@show'
+    ]);
+    Route::patch('admin/user/{id}/ban', [
+        'as' => 'user.ban',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\Administration\UserController@ban'
+    ]);
+    Route::patch('admin/user/{id}/unban', [
+        'as' => 'user.unban',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\Administration\UserController@unban'
     ]);
 
 });
