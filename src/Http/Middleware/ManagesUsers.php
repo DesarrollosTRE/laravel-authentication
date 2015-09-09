@@ -33,13 +33,10 @@ class ManagesUsers {
      */
     public function handle($request, Closure $next)
     {
-        if ( ! $this->auth->user() instanceof ManagesUsersContract) {
-            throw new MissingManagesUsers(trans('authentication::user.missing_manage_users'));
-        }
-
         if ( ! $this->auth->user()->managesUsers()) {
             return response('Unauthorized.', 401);
         }
+
         return $next($request);
     }
 

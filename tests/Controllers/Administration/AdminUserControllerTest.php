@@ -38,6 +38,15 @@ class AdminUserControllerTest extends TestCase {
         return $this;
     }
 
+    public function testMustManageUsers()
+    {
+        $user = app(UserRepository::class)->findByEmailAddress('another.user@example.com');
+        $this->actingAs($user);
+
+        $this->get(route('authentication::user.index'))
+            ->assertResponseStatus(401);
+    }
+
     public function testUserIndex()
     {
         $this->login()
