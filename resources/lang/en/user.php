@@ -5,8 +5,9 @@ return [
     /*
      * Labels
      */
+    'created_at'            => 'Registered at',
     'email'                 => 'E-mail address',
-    'name'                  => 'Your name',
+    'name'                  => 'Name',
     'optional'              => 'Optional',
     'password'              => 'Password',
     'password_confirmation' => 'Confirm password',
@@ -16,6 +17,7 @@ return [
      */
     'create'                => 'Create your account',
     'edit'                  => 'Edit user',
+    'index'                 => 'User index',
     'show'                  => 'User details',
     'update'                => 'Update user',
 

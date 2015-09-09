@@ -78,4 +78,12 @@ Route::group(['as' => 'authentication::'], function () {
         'uses' => 'Speelpenning\Authentication\Http\Controllers\PasswordResetController@update'
     ]);
 
+    /*
+     * User administration routes
+     */
+    Route::get('admin/user', [
+        'as' => 'admin.user.index',
+        'uses' => 'Speelpenning\Authentication\Http\Controllers\Administration\UserController@index'
+    ]);
+
 });
