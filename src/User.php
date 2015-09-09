@@ -3,12 +3,12 @@
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Speelpenning\Contracts\Authentication\CanRegister;
-use Speelpenning\Contracts\Authentication\ManagesUsers;
+use Speelpenning\Contracts\Authentication\CanRegister as CanRegisterContract;
+use Speelpenning\Contracts\Authentication\ManagesUsers as ManagesUsersContract;
 
-class User extends Model implements AuthenticatableContract, CanRegister, ManagesUsers {
+class User extends Model implements AuthenticatableContract, CanRegisterContract, ManagesUsersContract {
 
-    use Authenticatable;
+    use Authenticatable, CanRegister, ManagesUsers;
 
     /**
      * The database table used by the model.
@@ -30,29 +30,6 @@ class User extends Model implements AuthenticatableContract, CanRegister, Manage
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-
-    /**
-     * Registers a new user.
-     *
-     * @param null|string $name
-     * @param string $email
-     * @param string $password
-     * @return User
-     */
-    public static function register($name = null, $email, $password)
-    {
-        return new static(compact('name', 'email', 'password'));
-    }
-
-    /**
-     * Indicates if managing users is allowed.
-     *
-     * @return bool
-     */
-    public function managesUsers()
-    {
-        return (bool)$this->{$this->managesUsersIndicator()};
-    }
 
     /**
      * Returns the field name of the manages users indicator.
