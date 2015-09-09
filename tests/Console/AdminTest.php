@@ -14,6 +14,7 @@ class AdminTest extends TestCase {
     {
         parent::setUp();
 
+        $this->artisan('vendor:publish');
         $this->artisan('migrate:refresh');
 
         $this->dispatchFrom(RegisterUser::class, User::register('John Doe', 'john.doe@example.com', 'some-password'));
