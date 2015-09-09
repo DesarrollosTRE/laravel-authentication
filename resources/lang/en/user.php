@@ -5,6 +5,7 @@ return [
     /*
      * Labels
      */
+    'administrator'         => 'Administrator',
     'created_at'            => 'Registered at',
     'email'                 => 'E-mail address',
     'name'                  => 'Name',

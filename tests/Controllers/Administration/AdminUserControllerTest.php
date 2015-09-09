@@ -34,17 +34,19 @@ class AdminUserControllerTest extends TestCase {
     {
         $this->actingAs($this->user);
         $this->assertTrue($this->user->managesUsers());
+
+        return $this;
     }
 
     public function testUserIndex()
     {
-        $this->login();
-
-        $this->visit(route('authentication::admin.user.index'))
+        $this->login()
+            ->visit(route('authentication::admin.user.index'))
             ->see(trans('authentication::user.index'))
             ->see(trans('authentication::user.email'))
             ->see(trans('authentication::user.name'))
             ->see(trans('authentication::user.created_at'))
+            ->see(trans('authentication::user.administrator'))
             ->see('John Doe')
             ->see('John Doe Sr.')
             ->see('Another User');

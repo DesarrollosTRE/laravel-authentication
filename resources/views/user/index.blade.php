@@ -11,6 +11,7 @@
                 <td>{{ trans('authentication::user.email') }}</td>
                 <td>{{ trans('authentication::user.name') }}</td>
                 <td>{{ trans('authentication::user.created_at') }}</td>
+                <td>{{ trans('authentication::user.administrator') }}</td>
             </tr>
             </thead>
             <tbody>
@@ -19,6 +20,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->created_at }}</td>
+                    <td>{!! $user->managesUsers() ? '<i class="glyphicon glyphicon-ok"></i>' : '' !!}</td>
                 </tr>
             @endforeach
             </tbody>
