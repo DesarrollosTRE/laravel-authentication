@@ -106,4 +106,15 @@ class SessionControllerTest extends TestCase {
             ->seePageIs(route('authentication::profile.edit'));
     }
 
+    public function testBannedUsersCannotLogin()
+    {
+        $this->artisan('user:ban', ['email' => $this->user->email]);
+
+        $this->visit(route('authentication::session.create'))
+            ->type($this->user->email, 'email')
+            ->type($this->user->password, 'password')
+            ->press(trans('authentication::session.create'))
+            ->see(trans('authentication::user.banned', ['email' => $this->user->email]));
+    }
+
 }

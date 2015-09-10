@@ -1,4 +1,4 @@
-@extends(config('authentication.emailView'))
+@extends(config('authentication.views.email'))
 
 @section('content')
     <div class="container">

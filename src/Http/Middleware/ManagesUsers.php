@@ -3,8 +3,10 @@
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use Speelpenning\Authentication\Exceptions\MissingManagesUsers;
+use Speelpenning\Contracts\Authentication\ManagesUsers as ManagesUsersContract;
 
-class Authenticate {
+class ManagesUsers {
 
     /**
      * @var Guard
@@ -27,17 +29,14 @@ class Authenticate {
      * @param Request $request
      * @param Closure $next
      * @return mixed
+     * @throws MissingManagesUsers
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            }
-            else {
-                return redirect()->guest(route('authentication::session.create'));
-            }
+        if ( ! $this->auth->user()->managesUsers()) {
+            return response('Unauthorized.', 401);
         }
+
         return $next($request);
     }
 

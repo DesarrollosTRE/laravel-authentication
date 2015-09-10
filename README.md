@@ -18,15 +18,18 @@ This package is made to quick start a highly configurable authentication for you
 ### Installation
 
 Pull in the package by Composer:
-
 ```bash
 composer require speelpenning/laravel-authentication
 ```
 
 Add the service provider to app.php:
- 
 ```php
 Speelpenning\Authentication\AuthenticationServiceProvider::class,
+```
+
+Publish and run the database migrations by executing:
+```bash
+php artisan vendor:publish && php artisan migrate
 ```
 
 ### The user model
@@ -34,13 +37,11 @@ Speelpenning\Authentication\AuthenticationServiceProvider::class,
 There are two options for implementation: using the model that comes with the package or strip App\User and let it extend the package's user model. Most likely you choose to extend, so you can add your own logic and relationships to the model.
 
 For just using the package's model, change the model entry in auth.php like so:
-
 ```php
 'model' => Speelpenning\Authentication\User::class,
 ```
 
 Extending can be done like so:
-
 ```php
 <?php namespace App;
 
@@ -54,7 +55,7 @@ class User extends BaseUser
 }
 ```
 
-### Routes
+### Useful routes for your app
 
 Route name                            | Description
 ------------------------------------- | ---------------------------------------------------------
@@ -65,13 +66,13 @@ authentication::session.destroy       | Performs a user logout (shown on profile
 authentication::profile.edit          | Displays the edit profile form (shown on profile.show)
 authentication::password.edit         | Displays the change password form (shown on profile.show)
 authentication::password-reset.create | Displays the form for requesting a password reset link
+authentication::user.index            | Displays a list of users (administrators only)
 
 > All routes have a translation entry equal to the route name, e.g. trans('authentication::user.create').
 
 ### Integration in your app
 
 For this, I recommend you to read the configuration section below. When you have a configuration that satisfies your needs, you may add some listeners to the following events:
-
 ```php
 Speelpenning\Authentication\Events\PasswordResetLinkWasSent::class
 Speelpenning\Authentication\Events\PasswordWasChanged::class
@@ -79,9 +80,34 @@ Speelpenning\Authentication\Events\PasswordWasReset::class
 Speelpenning\Authentication\Events\UserHasLoggedIn::class
 Speelpenning\Authentication\Events\UserHasLoggedOut::class
 Speelpenning\Authentication\Events\UserHasLoginHasFailed::class
+Speelpenning\Authentication\Events\UserWasBanned::class
 Speelpenning\Authentication\Events\UserWasRegistered::class
 Speelpenning\Authentication\Events\UserWasRemembered::class
+Speelpenning\Authentication\Events\UserWasUnbanned::class
 Speelpenning\Authentication\Events\UserWasUpdated::class
+```
+
+## Usage
+
+### Registering a user by command line
+
+Users can be registered with the command below. When public registration is disabled, this is the only option to register users with your application. 
+```bash
+php artisan user:register <email> [<name>] [--with-reset]
+```
+
+### Administrator privileges
+
+Administrators are able to use the user administration features. You may grant or revoke administrator privileges with the following command:
+```bash
+php artisan user:admin <email> [--revoke]
+```
+
+### Banning or unbanning a user by command line
+
+In case you are the only administrator and accidentally banned yourself, you may unban yourself like so:
+```bash
+php artisan user:ban <email> [--unban]
 ```
 
 ## Configuration
@@ -91,7 +117,6 @@ To avoid publishing the config, all configuration can be done through the .env f
 ### Enable routes
 
 The routes included with the package are disabled by default to avoid conflicts with your application. They can be enabled like so:
-
 ```ini
 AUTH_ENABLE_ROUTES=[true|false]
 ```
@@ -100,9 +125,8 @@ Default value: false
 ### Parent and e-mail view
 
 The package comes with a plain white bootstrap parent view. Maybe that satisfies your needs, but if you are not very much charmed by that, change it with the following line:
-
 ```ini
-AUTH_PARENT_VIEW=<view-name>
+AUTH_APP_VIEW=<view-name>
 ```
 Default value: authentication::app
 
@@ -120,15 +144,9 @@ AUTH_REGISTRATION_ALLOW_PUBLIC=[true|false]
 ```
 Default value: true
 
-> When disallowing public registration, users can ben registered with
-```bash
-php artisan user:register <email> [<name>] [--with-reset]
-```
-
 #### User's name field
 
 This option switches the user's name field on, off or makes it a required field.
-
 ```ini
 AUTH_REGISTRATION_USERNAME=[on|off|required]
 ```
@@ -137,7 +155,6 @@ Default value: on
 #### Redirect URI
 
 After a successful registration the user will be redirected to this URI. This must be a valid URI within your application, since the redirect() helper function is handling the redirect.
-
 ```ini
 AUTH_REGISTRATION_REDIRECT_URI=<uri>
 ```
@@ -157,7 +174,6 @@ Default value: 8
 #### Remember me
 
 If you want to offer your users the convenience of remembering their login, switch this option to on.
-
 ```ini
 AUTH_LOGIN_REMEMBER_ME=[on|off|default]
 ```
@@ -166,7 +182,6 @@ Default value: off
 #### Redirect URI
 
 After a successful login attempt, the user will be redirected to this URI.  This must be a valid URI within your application, since the redirect() helper function is handling the redirect.
-
 ```ini
 AUTH_LOGIN_REDIRECT_URI=<uri>
 ```
@@ -177,7 +192,6 @@ Default value: /
 #### Redirect URI
 
 After a logout is performed, the user will be redirected to this URI. This must be a valid URI within your application, since the redirect() helper function is handling the redirect.
-
 ```ini
 AUTH_LOGIN_REDIRECT_URI=<uri>
 ```
@@ -188,7 +202,6 @@ Default value: /
 #### E-mail view
 
 Set the name of your e-mail here to override the package's default view. The view receives the user ($user) and password reset model ($passwordReset).
-
 ```ini
 AUTH_PASSWORD_RESET_EMAIL=<view-name>
 ```

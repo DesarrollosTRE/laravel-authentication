@@ -1,4 +1,4 @@
-@extends(config('authentication.parentView'))
+@extends(config('authentication.views.app'))
 
 @section('title', trans('authentication::password.edit'))
 

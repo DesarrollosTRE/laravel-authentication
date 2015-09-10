@@ -1,6 +1,7 @@
 <?php namespace Speelpenning\Authentication\Repositories;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Speelpenning\Authentication\User;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository as UserRepositoryContract;
@@ -40,6 +41,20 @@ class UserRepository implements UserRepositoryContract {
     public function findByEmailAddress($emailAddress)
     {
         return User::where('email', $emailAddress)->firstOrFail();
+    }
+
+    /**
+     * Queries the repository and returns a paginated result.
+     *
+     * @param null|string $q
+     * @return LengthAwarePaginator
+     */
+    public function query($q = null)
+    {
+        return User::where(function ($query) use ($q) {
+            $query->where('email', 'like', "%{$q}")
+                ->orWhere('name', 'like', "%{$q}");
+        })->orderBy('email')->paginate();
     }
 
     /**

@@ -1,6 +1,8 @@
 <?php namespace Speelpenning\Authentication;
 
 use Illuminate\Support\ServiceProvider;
+use Speelpenning\Authentication\Console\Commands\Admin;
+use Speelpenning\Authentication\Console\Commands\Ban;
 use Speelpenning\Authentication\Repositories\PasswordResetRepository;
 use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\Console\Commands\RegisterUser;
@@ -20,6 +22,8 @@ class AuthenticationServiceProvider extends ServiceProvider {
 
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'authentication');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'authentication');
+
+        $this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'migrations');
     }
 
     /**
@@ -38,6 +42,8 @@ class AuthenticationServiceProvider extends ServiceProvider {
         });
 
         $this->registerRegisterUserCommand();
+        $this->registerAdminCommand();
+        $this->registerBanCommand();
     }
 
     /**
@@ -50,4 +56,27 @@ class AuthenticationServiceProvider extends ServiceProvider {
         });
         $this->commands('command.authentication.user.register');
     }
+
+    /**
+     * Registers the user:admin command.
+     */
+    protected function registerAdminCommand()
+    {
+        $this->app->singleton('command.authentication.user.admin', function ($app) {
+            return $app->make(Admin::class);
+        });
+        $this->commands('command.authentication.user.admin');
+    }
+
+    /**
+     * Registers the user:ban command.
+     */
+    protected function registerBanCommand()
+    {
+        $this->app->singleton('command.authentication.user.ban', function ($app) {
+            return $app->make(Ban::class);
+        });
+        $this->commands('command.authentication.user.ban');
+    }
+
 }

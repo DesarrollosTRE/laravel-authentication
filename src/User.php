@@ -1,13 +1,16 @@
 <?php namespace Speelpenning\Authentication;
 
+use DateTime;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Speelpenning\Contracts\Authentication\CanRegister;
+use Speelpenning\Contracts\Authentication\CanBeBanned as CanBeBannedContract;
+use Speelpenning\Contracts\Authentication\CanRegister as CanRegisterContract;
+use Speelpenning\Contracts\Authentication\ManagesUsers as ManagesUsersContract;
 
-class User extends Model implements AuthenticatableContract, CanRegister {
+class User extends Model implements AuthenticatableContract, CanBeBannedContract, CanRegisterContract, ManagesUsersContract {
 
-    use Authenticatable;
+    use Authenticatable, CanBeBanned, CanRegister, ManagesUsers;
 
     /**
      * The database table used by the model.
@@ -29,18 +32,5 @@ class User extends Model implements AuthenticatableContract, CanRegister {
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-
-    /**
-     * Registers a new user.
-     *
-     * @param null|string $name
-     * @param string $email
-     * @param string $password
-     * @return User
-     */
-    public static function register($name = null, $email, $password)
-    {
-        return new static(compact('name', 'email', 'password'));
-    }
 
 }
