@@ -39,4 +39,26 @@ class BanTest extends TestCase {
         $this->assertContains('User not found', Artisan::output());
     }
 
+    public function testBannedUsersAreLoggedOutImmediately()
+    {
+        $this->visit(route('authentication::session.create'))
+            ->type($this->user->email, 'email')
+            ->type('some-password', 'password')
+            ->press(trans('authentication::session.create'))
+
+            ->visit(route('authentication::profile.show'))
+            ->seePageIs(route('authentication::profile.show'));
+
+        $this->artisan('user:ban', ['email' => $this->user->email]);
+        $this->assertContains(trans('authentication::user.banned', ['email' => $this->user->email]), Artisan::output());
+
+        // Refresh the authenticated user as this happens on every request
+        // in Laravel but while testing the old user data is used.
+        auth()->setUser(app(UserRepository::class)->findByEmailAddress($this->user->email));
+
+        $this->visit(route('authentication::profile.show'))
+            ->seePageIs(route('authentication::session.create'))
+            ->see(trans('authentication::user.banned', ['email' => $this->user->email]));
+    }
+
 }

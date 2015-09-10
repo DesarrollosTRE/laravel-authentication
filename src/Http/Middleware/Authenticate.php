@@ -3,6 +3,7 @@
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
 
 class Authenticate {
 
@@ -12,13 +13,20 @@ class Authenticate {
     protected $auth;
 
     /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
      * Authenticate constructor.
      *
      * @param Guard $auth
+     * @param Translator $translator
      */
-    public function __construct(Guard $auth)
+    public function __construct(Guard $auth, Translator $translator)
     {
         $this->auth = $auth;
+        $this->translator = $translator;
     }
 
     /**
@@ -38,6 +46,16 @@ class Authenticate {
                 return redirect()->guest(route('authentication::session.create'));
             }
         }
+
+        $user = $this->auth->user();
+
+        if ($user->isBanned()) {
+            $this->auth->logout();
+            return redirect()->route('authentication::session.create')->withErrors([
+                'authentication::login_error' => $this->translator->get('authentication::user.banned', ['email' => $user->email])
+            ]);
+        }
+
         return $next($request);
     }
 
