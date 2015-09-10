@@ -33,4 +33,20 @@ class User extends Model implements AuthenticatableContract, CanBeBannedContract
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at', 'banned_at'];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'admin' => 'boolean',
+    ];
+
 }
