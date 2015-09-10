@@ -17,11 +17,13 @@ trait CanBeBanned {
     /**
      * Indicates from what moment the user is banned.
      *
-     * @return Carbon
+     * @return null|Carbon
      */
     public function isBannedSince()
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->{$this->getBannedAtColumnName()});
+        return $this->isBanned()
+            ? Carbon::createFromFormat('Y-m-d H:i:s', $this->{$this->getBannedAtColumnName()})
+            : null;
     }
 
     /**

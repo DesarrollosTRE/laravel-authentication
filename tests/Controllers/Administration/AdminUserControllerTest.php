@@ -85,6 +85,7 @@ class AdminUserControllerTest extends TestCase {
             ->see(trans('authentication::user.ban'))
             ->press(trans('authentication::user.ban'))
             ->see(trans('authentication::user.unban'))
+            ->see(app(UserRepository::class)->findByEmailAddress('another.user@example.com')->isBannedSince())
             ->press(trans('authentication::user.unban'))
             ->see(trans('authentication::user.ban'));
     }

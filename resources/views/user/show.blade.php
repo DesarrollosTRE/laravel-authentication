@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label>{{ trans('authentication::user.banned_at') }}</label>
-                    <p class="form-control-static">{{ $user->banned_at }}</p>
+                    <p class="form-control-static">{{ $user->isBannedSince() }}</p>
                 </div>
                 <div class="form-group">
                     <label>{{ trans('authentication::user.administrator') }}</label>
