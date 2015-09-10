@@ -1,4 +1,4 @@
-<form action="{{ route('authentication::user.unban', $user->id) }}" method="post">
+<form action="{{ $route or route('authentication::user.unban', $user->id) }}" method="post">
 
     {!! method_field('patch') !!}
 

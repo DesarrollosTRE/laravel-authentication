@@ -1,6 +1,7 @@
-<form action="{{ route('authentication::password.update') }}" method="post">
+<form action="{{ $route or route('authentication::password.update') }}" method="post">
 
     {!! method_field('patch') !!}
+
     {!! csrf_field() !!}
 
     <div class="form-group {{ $errors->has('current_password') ? 'has-error' : '' }}">

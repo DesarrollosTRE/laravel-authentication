@@ -1,4 +1,4 @@
-<form action="{{ route('authentication::password-reset.update') }}" method="post">
+<form action="{{ $route or route('authentication::password-reset.update') }}" method="post">
 
     {!! method_field('patch') !!}
 

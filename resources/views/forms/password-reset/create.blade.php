@@ -1,4 +1,4 @@
-<form action="{{ route('authentication::password-reset.store') }}" method="post">
+<form action="{{ $route or route('authentication::password-reset.store') }}" method="post">
 
     {{ csrf_field() }}
 

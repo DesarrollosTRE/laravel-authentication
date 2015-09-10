@@ -1,6 +1,7 @@
-<form action="{{ route('authentication::profile.update') }}" method="post">
+<form action="{{ $route or route('authentication::profile.update') }}" method="post">
 
     {!! method_field('patch') !!}
+
     {!! csrf_field() !!}
 
     @if(config('authentication.registration.userName') != 'off')

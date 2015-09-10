@@ -33,7 +33,7 @@
         <button type="submit" class="btn btn-primary">
             {{ trans('authentication::session.create') }}
         </button>
-        <a href="{{ route('authentication::password-reset.create') }}">
+        <a href="{{ route('authentication::password-reset.create') }}" class="btn btn-link">
             {{ trans('authentication::password-reset.forgot_your_password') }}
         </a>
     </div>
