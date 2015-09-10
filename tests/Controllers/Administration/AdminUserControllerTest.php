@@ -30,27 +30,28 @@ class AdminUserControllerTest extends TestCase {
         $this->user = app(UserRepository::class)->findByEmailAddress('john.doe@example.com');
     }
 
-    protected function login()
+    protected function login($email = 'john.doe@example.com')
     {
+        $this->user = app(UserRepository::class)->findByEmailAddress($email);
+
         $this->actingAs($this->user);
-        $this->assertTrue($this->user->managesUsers());
 
         return $this;
     }
 
     public function testMustManageUsers()
     {
-        $user = app(UserRepository::class)->findByEmailAddress('another.user@example.com');
-        $this->actingAs($user);
-
-        $this->get(route('authentication::user.index'))
+        $this->login('another.user@example.com')
+            ->get(route('authentication::user.index'))
             ->assertResponseStatus(401);
     }
 
     public function testUserIndex()
     {
         $this->login()
-            ->visit(route('authentication::user.index'))
+            ->assertTrue($this->user->managesUsers());
+
+        $this->visit(route('authentication::user.index'))
             ->see(trans('authentication::user.index'))
             ->see(trans('authentication::user.email'))
             ->see(trans('authentication::user.name'))
@@ -64,7 +65,9 @@ class AdminUserControllerTest extends TestCase {
     public function testUserDetails()
     {
         $this->login()
-            ->visit(route('authentication::user.index'))
+            ->assertTrue($this->user->managesUsers());
+
+        $this->visit(route('authentication::user.index'))
             ->click($this->user->email)
             ->see(trans('authentication::user.show'))
             ->see(trans('authentication::user.email'))
@@ -80,7 +83,9 @@ class AdminUserControllerTest extends TestCase {
     public function testUserCanBeBannedAndUnbanned()
     {
         $this->login()
-            ->visit(route('authentication::user.index'))
+            ->assertTrue($this->user->managesUsers());
+
+        $this->visit(route('authentication::user.index'))
             ->click('another.user@example.com')
             ->see(trans('authentication::user.ban'))
             ->press(trans('authentication::user.ban'))
@@ -89,5 +94,4 @@ class AdminUserControllerTest extends TestCase {
             ->press(trans('authentication::user.unban'))
             ->see(trans('authentication::user.ban'));
     }
-
 }
