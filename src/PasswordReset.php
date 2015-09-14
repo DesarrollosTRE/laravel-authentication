@@ -60,14 +60,4 @@ class PasswordReset extends Model implements ExpirableToken {
         return Carbon::now() > $this->expiresAt();
     }
 
-    /**
-     * Checks if the token is valid.
-     *
-     * @return bool
-     */
-    public function isValid()
-    {
-        return ! $this->hasExpired();
-    }
-
 }
