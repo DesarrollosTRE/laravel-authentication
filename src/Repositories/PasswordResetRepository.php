@@ -16,7 +16,7 @@ class PasswordResetRepository implements PasswordResetRepositoryContract {
     public function exists($token)
     {
         $reset = PasswordReset::where('token', $token)->first();
-        return $reset and $reset->isValid();
+        return $reset and ! $reset->hasExpired();
     }
 
     /**
