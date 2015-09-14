@@ -1,6 +1,5 @@
 <?php namespace Speelpenning\Authentication;
 
-use DateTime;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
