@@ -4,7 +4,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Contracts\Hashing\Hasher;
 use Speelpenning\Authentication\Events\PasswordWasReset;
-use Speelpenning\Authentication\Exceptions\TokenHasExpired;
+use Speelpenning\Authentication\Exceptions\TokenIsExpired;
 use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
@@ -51,8 +51,8 @@ class ResetPassword implements SelfHandling {
     {
         $reset = $resets->findByEmailAndToken($this->email, $this->token);
 
-        if ($reset->hasExpired()) {
-            throw new TokenHasExpired();
+        if ($reset->isExpired()) {
+            throw new TokenIsExpired();
         }
 
         $user = $users->findByEmailAddress($this->email);

@@ -4,7 +4,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
-use Speelpenning\Authentication\Exceptions\TokenHasExpired;
+use Speelpenning\Authentication\Exceptions\TokenIsExpired;
 use Speelpenning\Authentication\Http\Requests\SendPasswordResetLinkRequest;
 use Speelpenning\Authentication\Http\Requests\ResetPasswordRequest;
 use Speelpenning\Authentication\Jobs\ResetPassword;
@@ -74,7 +74,7 @@ class PasswordResetController extends Controller {
                 'authentication::password-reset.updated' => trans('authentication::password-reset.updated'),
             ]);
         }
-        catch (TokenHasExpired $e) {
+        catch (TokenIsExpired $e) {
             return redirect()->route('authentication::password-reset.create')->withErrors([
                 'authentication::password-reset.expired' => trans('authentication::password-reset.expired'),
             ]);

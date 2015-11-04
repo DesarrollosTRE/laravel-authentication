@@ -2,5 +2,5 @@
 
 use RuntimeException;
 
-class TokenHasExpired extends RuntimeException {
+class TokenIsExpired extends RuntimeException {
 }

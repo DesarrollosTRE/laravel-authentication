@@ -28,7 +28,7 @@ class PasswordResetTest extends TestCase {
     {
         $reset = $this->generatePasswordReset();
 
-        $this->assertFalse($reset->hasExpired());
+        $this->assertFalse($reset->isExpired());
     }
 
     public function testItCanExpire()
@@ -37,7 +37,7 @@ class PasswordResetTest extends TestCase {
 
         $reset = $this->generatePasswordReset();
 
-        $this->assertTrue($reset->hasExpired());
+        $this->assertTrue($reset->isExpired());
     }
 
 }
