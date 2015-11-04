@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Http\Middleware;
+<?php
+
+namespace Speelpenning\Authentication\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
@@ -6,8 +8,8 @@ use Illuminate\Http\Request;
 use Speelpenning\Authentication\Exceptions\MissingManagesUsers;
 use Speelpenning\Contracts\Authentication\ManagesUsers as ManagesUsersContract;
 
-class ManagesUsers {
-
+class ManagesUsers
+{
     /**
      * @var Guard
      */
@@ -33,11 +35,10 @@ class ManagesUsers {
      */
     public function handle($request, Closure $next)
     {
-        if ( ! $this->auth->user()->managesUsers()) {
+        if (! $this->auth->user()->managesUsers()) {
             return response('Unauthorized.', 401);
         }
 
         return $next($request);
     }
-
 }

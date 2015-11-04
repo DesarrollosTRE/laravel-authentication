@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Http\Controllers;
+<?php
+
+namespace Speelpenning\Authentication\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\RedirectResponse;
@@ -11,8 +13,8 @@ use Speelpenning\Authentication\Jobs\ResetPassword;
 use Speelpenning\Authentication\Jobs\SendPasswordResetLink;
 use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository;
 
-class PasswordResetController extends Controller {
-
+class PasswordResetController extends Controller
+{
     use DispatchesJobs;
 
     /**
@@ -51,8 +53,7 @@ class PasswordResetController extends Controller {
     {
         if ($resets->exists($token)) {
             return view('authentication::password-reset.edit')->with('token', $token);
-        }
-        else {
+        } else {
             return redirect()->route('authentication::password-reset.create')->withErrors([
                 'authentication::password-reset.expired' => trans('authentication::password-reset.expired'),
             ]);
@@ -73,12 +74,10 @@ class PasswordResetController extends Controller {
             return redirect()->route('authentication::session.create')->withErrors([
                 'authentication::password-reset.updated' => trans('authentication::password-reset.updated'),
             ]);
-        }
-        catch (TokenIsExpired $e) {
+        } catch (TokenIsExpired $e) {
             return redirect()->route('authentication::password-reset.create')->withErrors([
                 'authentication::password-reset.expired' => trans('authentication::password-reset.expired'),
             ]);
         }
     }
-
 }

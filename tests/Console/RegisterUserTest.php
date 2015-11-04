@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Artisan;
 use Speelpenning\Authentication\User;
 
-class RegisterUserTest extends TestCase {
-
+class RegisterUserTest extends TestCase
+{
     public function setUp()
     {
         parent::setUp();
@@ -43,5 +43,4 @@ class RegisterUserTest extends TestCase {
         $this->artisan('user:register', ['email' => $this->user->email, '--with-reset' => true]);
         $this->assertContains('A password reset link has been sent.', Artisan::output());
     }
-
 }

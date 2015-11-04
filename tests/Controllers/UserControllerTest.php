@@ -2,8 +2,8 @@
 
 use Speelpenning\Authentication\User;
 
-class UserControllerTest extends TestCase {
-
+class UserControllerTest extends TestCase
+{
     /**
      * @var User
      */
@@ -138,5 +138,4 @@ class UserControllerTest extends TestCase {
         $this->get(route('authentication::user.create'))
             ->assertResponseStatus(403);
     }
-
 }

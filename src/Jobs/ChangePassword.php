@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Jobs;
+<?php
+
+namespace Speelpenning\Authentication\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -8,8 +10,8 @@ use Illuminate\Support\MessageBag;
 use Speelpenning\Authentication\Events\PasswordWasChanged;
 use Speelpenning\Authentication\Repositories\UserRepository;
 
-class ChangePassword implements SelfHandling {
-
+class ChangePassword implements SelfHandling
+{
     /**
      * @var int
      */
@@ -52,7 +54,7 @@ class ChangePassword implements SelfHandling {
     {
         $user = $users->find($this->id);
 
-        if ( ! $hash->check($this->current_password, $user->password)) {
+        if (! $hash->check($this->current_password, $user->password)) {
             $messages->add('current_password', trans('authentication::password.current_password_invalid'));
             throw new ValidationException($messages);
         }
@@ -63,5 +65,4 @@ class ChangePassword implements SelfHandling {
 
         $event->fire(new PasswordWasChanged($user));
     }
-
 }

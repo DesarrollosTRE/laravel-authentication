@@ -1,12 +1,14 @@
-<?php namespace Speelpenning\Authentication\Http\Middleware;
+<?php
+
+namespace Speelpenning\Authentication\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 
-class Authenticate {
-
+class Authenticate
+{
     /**
      * @var Guard
      */
@@ -41,8 +43,7 @@ class Authenticate {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
-            }
-            else {
+            } else {
                 return redirect()->guest(route('authentication::session.create'));
             }
         }
@@ -58,5 +59,4 @@ class Authenticate {
 
         return $next($request);
     }
-
 }

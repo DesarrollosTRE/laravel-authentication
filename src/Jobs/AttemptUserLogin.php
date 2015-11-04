@@ -1,4 +1,6 @@
-<?php  namespace Speelpenning\Authentication\Jobs;
+<?php
+
+namespace Speelpenning\Authentication\Jobs;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -9,8 +11,8 @@ use Speelpenning\Authentication\Events\UserLoginHasFailed;
 use Speelpenning\Authentication\Exceptions\LoginFailed;
 use Speelpenning\Authentication\Exceptions\UserIsBanned;
 
-class AttemptUserLogin implements SelfHandling {
-
+class AttemptUserLogin implements SelfHandling
+{
     /**
      * Array holding the credentials provided by the user.
      *
@@ -50,7 +52,7 @@ class AttemptUserLogin implements SelfHandling {
      */
     public function handle(Guard $auth, Dispatcher $event, Translator $translator)
     {
-        if ( ! $auth->attempt($this->credentials, $this->remember)) {
+        if (! $auth->attempt($this->credentials, $this->remember)) {
             $event->fire(new UserLoginHasFailed($auth->user()));
             throw new LoginFailed($translator->get('authentication::session.creation_failed'));
         }
@@ -63,5 +65,4 @@ class AttemptUserLogin implements SelfHandling {
 
         $event->fire(new UserHasLoggedIn($user));
     }
-
 }

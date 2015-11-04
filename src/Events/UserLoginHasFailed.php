@@ -1,9 +1,11 @@
-<?php namespace Speelpenning\Authentication\Events;
+<?php
+
+namespace Speelpenning\Authentication\Events;
 
 use Illuminate\Queue\SerializesModels;
 
-class UserLoginHasFailed {
-
+class UserLoginHasFailed
+{
     use SerializesModels;
 
     /**
@@ -20,5 +22,4 @@ class UserLoginHasFailed {
     {
         $this->email = $email;
     }
-
 }

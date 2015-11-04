@@ -1,4 +1,6 @@
-<?php  namespace Speelpenning\Authentication\Jobs;
+<?php
+
+namespace Speelpenning\Authentication\Jobs;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -6,8 +8,8 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Speelpenning\Authentication\Events\UserWasRemembered;
 use Speelpenning\Authentication\Exceptions\RememberingUserFailed;
 
-class AttemptRememberingUser implements SelfHandling {
-
+class AttemptRememberingUser implements SelfHandling
+{
     /**
      * Create a new job instance.
      */
@@ -34,5 +36,4 @@ class AttemptRememberingUser implements SelfHandling {
 
         throw new RememberingUserFailed();
     }
-
 }

@@ -1,6 +1,9 @@
-<?php namespace Speelpenning\Authentication\Exceptions;
+<?php
+
+namespace Speelpenning\Authentication\Exceptions;
 
 use Exception;
 
-class UserIsBanned extends Exception {
+class UserIsBanned extends Exception
+{
 }

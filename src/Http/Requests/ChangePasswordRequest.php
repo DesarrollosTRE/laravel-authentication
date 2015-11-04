@@ -1,9 +1,11 @@
-<?php namespace Speelpenning\Authentication\Http\Requests;
+<?php
+
+namespace Speelpenning\Authentication\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChangePasswordRequest extends FormRequest {
-
+class ChangePasswordRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,5 +28,4 @@ class ChangePasswordRequest extends FormRequest {
             'new_password'  => ['required', 'confirmed', 'string', 'min:' . config('authentication.password.minLength'), 'different:current_password'],
         ];
     }
-
 }

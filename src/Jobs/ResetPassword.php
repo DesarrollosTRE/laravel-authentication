@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Jobs;
+<?php
+
+namespace Speelpenning\Authentication\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -8,8 +10,8 @@ use Speelpenning\Authentication\Exceptions\TokenIsExpired;
 use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
-class ResetPassword implements SelfHandling {
-
+class ResetPassword implements SelfHandling
+{
     /**
      * @var string
      */
@@ -61,5 +63,4 @@ class ResetPassword implements SelfHandling {
 
         $event->fire(new PasswordWasReset($user));
     }
-
 }

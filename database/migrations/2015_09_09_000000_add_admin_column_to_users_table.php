@@ -3,8 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAdminColumnToUsersTable extends Migration {
-
+class AddAdminColumnToUsersTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -28,5 +28,4 @@ class AddAdminColumnToUsersTable extends Migration {
             $table->dropColumn('admin');
         });
     }
-
 }

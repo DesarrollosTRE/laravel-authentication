@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Jobs;
+<?php
+
+namespace Speelpenning\Authentication\Jobs;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -7,8 +9,8 @@ use Illuminate\Translation\Translator;
 use Speelpenning\Authentication\Events\UserHasLoggedOut;
 use Speelpenning\Authentication\Exceptions\SessionHasExpired;
 
-class PerformUserLogout implements SelfHandling {
-
+class PerformUserLogout implements SelfHandling
+{
     /**
      * Create a new job instance.
      */
@@ -37,5 +39,4 @@ class PerformUserLogout implements SelfHandling {
 
         $event->fire(new UserHasLoggedOut($user));
     }
-
 }

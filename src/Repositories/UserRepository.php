@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Repositories;
+<?php
+
+namespace Speelpenning\Authentication\Repositories;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -6,8 +8,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Speelpenning\Authentication\User;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository as UserRepositoryContract;
 
-class UserRepository implements UserRepositoryContract {
-
+class UserRepository implements UserRepositoryContract
+{
     /**
      * Checks if a user with a specific e-mail address exists in the database.
      *
@@ -67,5 +69,4 @@ class UserRepository implements UserRepositoryContract {
     {
         return $model->save();
     }
-
 }

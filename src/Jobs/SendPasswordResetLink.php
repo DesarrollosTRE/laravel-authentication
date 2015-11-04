@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Jobs;
+<?php
+
+namespace Speelpenning\Authentication\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Config\Repository;
@@ -13,8 +15,8 @@ use Speelpenning\Authentication\PasswordReset;
 use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
-class SendPasswordResetLink implements SelfHandling, ShouldQueue {
-
+class SendPasswordResetLink implements SelfHandling, ShouldQueue
+{
     use InteractsWithQueue, SerializesModels;
 
     /**
@@ -65,5 +67,4 @@ class SendPasswordResetLink implements SelfHandling, ShouldQueue {
 
         $event->fire(new PasswordResetLinkWasSent($passwordReset));
     }
-
 }

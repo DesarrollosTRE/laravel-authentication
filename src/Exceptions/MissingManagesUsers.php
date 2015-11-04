@@ -1,6 +1,9 @@
-<?php namespace Speelpenning\Authentication\Exceptions;
+<?php
+
+namespace Speelpenning\Authentication\Exceptions;
 
 use ErrorException;
 
-class MissingManagesUsers extends ErrorException {
+class MissingManagesUsers extends ErrorException
+{
 }

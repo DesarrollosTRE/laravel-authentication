@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication;
+<?php
+
+namespace Speelpenning\Authentication;
 
 use Illuminate\Support\ServiceProvider;
 use Speelpenning\Authentication\Console\Commands\Admin;
@@ -9,8 +11,8 @@ use Speelpenning\Authentication\Console\Commands\RegisterUser;
 use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository as PasswordResetRepositoryContract;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository as UserRepositoryContract;
 
-class AuthenticationServiceProvider extends ServiceProvider {
-
+class AuthenticationServiceProvider extends ServiceProvider
+{
     /**
      * Bootstrap the application services.
      */
@@ -78,5 +80,4 @@ class AuthenticationServiceProvider extends ServiceProvider {
         });
         $this->commands('command.authentication.user.ban');
     }
-
 }

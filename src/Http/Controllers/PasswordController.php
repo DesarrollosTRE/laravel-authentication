@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Http\Controllers;
+<?php
+
+namespace Speelpenning\Authentication\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Validation\ValidationException;
@@ -10,8 +12,8 @@ use Speelpenning\Authentication\Http\Middleware\Authenticate;
 use Speelpenning\Authentication\Http\Requests\ChangePasswordRequest;
 use Speelpenning\Authentication\Jobs\ChangePassword;
 
-class PasswordController extends Controller {
-
+class PasswordController extends Controller
+{
     use DispatchesJobs;
 
     /**
@@ -46,10 +48,8 @@ class PasswordController extends Controller {
         try {
             $this->dispatchFrom(ChangePassword::class, $request);
             return redirect()->route('authentication::profile.show');
-        }
-        catch (ValidationException $e) {
+        } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());
         }
     }
-
 }

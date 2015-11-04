@@ -1,6 +1,9 @@
-<?php namespace Speelpenning\Authentication\Exceptions;
+<?php
+
+namespace Speelpenning\Authentication\Exceptions;
 
 use RuntimeException;
 
-class RememberingUserFailed extends RuntimeException {
+class RememberingUserFailed extends RuntimeException
+{
 }

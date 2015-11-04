@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Console\Commands;
+<?php
+
+namespace Speelpenning\Authentication\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Validation\Factory;
@@ -8,8 +10,8 @@ use Illuminate\Support\Str;
 use Speelpenning\Authentication\Http\Requests\StoreUserRequest;
 use Speelpenning\Authentication\Jobs\SendPasswordResetLink;
 
-class RegisterUser extends Command {
-
+class RegisterUser extends Command
+{
     use DispatchesJobs;
 
     /**
@@ -44,8 +46,7 @@ class RegisterUser extends Command {
             $this->registerUser($input);
 
             $this->sendResetPasswordLink($input);
-        }
-        catch (ValidationException $e) {
+        } catch (ValidationException $e) {
             $this->error(PHP_EOL . implode(PHP_EOL, $e->errors()->all()) . PHP_EOL);
         }
     }
@@ -117,5 +118,4 @@ class RegisterUser extends Command {
             $this->info(trans('authentication::password-reset.console.created'));
         }
     }
-
 }

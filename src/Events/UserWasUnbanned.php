@@ -1,10 +1,12 @@
-<?php namespace Speelpenning\Authentication\Events;
+<?php
+
+namespace Speelpenning\Authentication\Events;
 
 use Illuminate\Queue\SerializesModels;
 use Speelpenning\Contracts\Authentication\CanBeBanned;
 
-class UserWasUnbanned {
-
+class UserWasUnbanned
+{
     use SerializesModels;
 
     /**
@@ -21,5 +23,4 @@ class UserWasUnbanned {
     {
         $this->user = $user;
     }
-
 }

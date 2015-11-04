@@ -1,9 +1,11 @@
-<?php namespace Speelpenning\Authentication;
+<?php
+
+namespace Speelpenning\Authentication;
 
 use Carbon\Carbon;
 
-trait CanBeBanned {
-
+trait CanBeBanned
+{
     /**
      * Indicates whether the user is banned.
      *
@@ -55,5 +57,4 @@ trait CanBeBanned {
     {
         $this->{$this->getBannedAtColumnName()} = null;
     }
-
 }

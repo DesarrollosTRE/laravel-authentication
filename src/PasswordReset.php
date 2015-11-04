@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication;
+<?php
+
+namespace Speelpenning\Authentication;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -6,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Speelpenning\Contracts\Authentication\ExpirableToken;
 
-class PasswordReset extends Model implements ExpirableToken {
-
+class PasswordReset extends Model implements ExpirableToken
+{
     protected $table = 'password_resets';
 
     protected $fillable = ['email', 'token', 'created_at'];
@@ -59,5 +61,4 @@ class PasswordReset extends Model implements ExpirableToken {
     {
         return Carbon::now() > $this->expiresAt();
     }
-
 }

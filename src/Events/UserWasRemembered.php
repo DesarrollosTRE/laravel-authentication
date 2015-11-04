@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Events;
+<?php
+
+namespace Speelpenning\Authentication\Events;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Queue\SerializesModels;
@@ -21,5 +23,4 @@ class UserWasRemembered
     {
         $this->user = $user;
     }
-
 }

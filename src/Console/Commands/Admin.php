@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Console\Commands;
+<?php
+
+namespace Speelpenning\Authentication\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Validation\Factory;
@@ -10,8 +12,8 @@ use Speelpenning\Authentication\Http\Requests\StoreUserRequest;
 use Speelpenning\Authentication\Jobs\SendPasswordResetLink;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
-class Admin extends Command {
-
+class Admin extends Command
+{
     use DispatchesJobs;
 
     /**
@@ -44,17 +46,14 @@ class Admin extends Command {
             if ($this->option('revoke')) {
                 $user->{$user->managesUsersIndicator()} = false;
                 $this->info(trans('authentication::user.admin_revoked', ['email' => $user->email]));
-            }
-            else {
+            } else {
                 $user->{$user->managesUsersIndicator()} = true;
                 $this->info(trans('authentication::user.admin_granted', ['email' => $user->email]));
             }
 
             $users->save($user);
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             $this->error('User not found.');
         }
     }
-
 }

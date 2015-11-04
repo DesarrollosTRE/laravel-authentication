@@ -6,8 +6,8 @@ use Speelpenning\Authentication\Jobs\RegisterUser;
 use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\User;
 
-class BanTest extends TestCase {
-
+class BanTest extends TestCase
+{
     use DispatchesJobs;
 
     public function setUp()
@@ -60,5 +60,4 @@ class BanTest extends TestCase {
             ->seePageIs(route('authentication::session.create'))
             ->see(trans('authentication::user.banned', ['email' => $this->user->email]));
     }
-
 }

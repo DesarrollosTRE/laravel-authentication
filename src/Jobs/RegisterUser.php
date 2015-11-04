@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Jobs;
+<?php
+
+namespace Speelpenning\Authentication\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -7,8 +9,8 @@ use Speelpenning\Authentication\Events\UserWasRegistered;
 use Speelpenning\Authentication\User;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
-class RegisterUser implements SelfHandling {
-
+class RegisterUser implements SelfHandling
+{
     /**
      * @var null|string
      */
@@ -54,5 +56,4 @@ class RegisterUser implements SelfHandling {
 
         $event->fire(new UserWasRegistered($user));
     }
-
 }

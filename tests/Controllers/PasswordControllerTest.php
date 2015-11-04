@@ -5,8 +5,8 @@ use Speelpenning\Authentication\Jobs\RegisterUser;
 use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\User;
 
-class PasswordControllerTest extends TestCase {
-
+class PasswordControllerTest extends TestCase
+{
     use DispatchesJobs;
 
     /**
@@ -116,5 +116,4 @@ class PasswordControllerTest extends TestCase {
             ->press(trans('authentication::password.update'))
             ->see('The new password must be at least ' . config('authentication.password.minLength') . ' characters.');
     }
-
 }

@@ -1,12 +1,14 @@
-<?php namespace Speelpenning\Authentication\Jobs;
+<?php
+
+namespace Speelpenning\Authentication\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
 use Speelpenning\Authentication\Events\UserWasUpdated;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
-class UpdateUser implements SelfHandling {
-
+class UpdateUser implements SelfHandling
+{
     /**
      * @var int
      */
@@ -56,5 +58,4 @@ class UpdateUser implements SelfHandling {
 
         $event->fire(new UserWasUpdated($user));
     }
-
 }

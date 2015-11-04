@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Http\Controllers;
+<?php
+
+namespace Speelpenning\Authentication\Http\Controllers;
 
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -9,8 +11,8 @@ use Speelpenning\Authentication\Http\Requests\CreateUserRequest;
 use Speelpenning\Authentication\Http\Requests\StoreUserRequest;
 use Speelpenning\Authentication\Jobs\RegisterUser;
 
-class UserController extends Controller {
-
+class UserController extends Controller
+{
     use DispatchesJobs;
 
     /**
@@ -37,5 +39,4 @@ class UserController extends Controller {
 
         return redirect($config->get('authentication.registration.redirectUri'));
     }
-
 }

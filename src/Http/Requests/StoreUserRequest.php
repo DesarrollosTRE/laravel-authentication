@@ -1,9 +1,11 @@
-<?php namespace Speelpenning\Authentication\Http\Requests;
+<?php
+
+namespace Speelpenning\Authentication\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest {
-
+class StoreUserRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -48,5 +50,4 @@ class StoreUserRequest extends FormRequest {
             ? ['required', 'string']
             : ['sometimes', 'string'];
     }
-
 }

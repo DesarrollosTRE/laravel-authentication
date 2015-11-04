@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Http\Controllers;
+<?php
+
+namespace Speelpenning\Authentication\Http\Controllers;
 
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -14,8 +16,8 @@ use Speelpenning\Authentication\Jobs\AttemptRememberingUser;
 use Speelpenning\Authentication\Jobs\AttemptUserLogin;
 use Speelpenning\Authentication\Jobs\PerformUserLogout;
 
-class SessionController extends Controller {
-
+class SessionController extends Controller
+{
     use DispatchesJobs;
 
     /**
@@ -43,8 +45,7 @@ class SessionController extends Controller {
         try {
             $this->dispatch(new AttemptRememberingUser());
             return redirect()->intended($this->config->get('authentication.login.redirectUri'));
-        }
-        catch (RememberingUserFailed $e) {
+        } catch (RememberingUserFailed $e) {
             return view('authentication::session.create');
         }
     }
@@ -60,13 +61,11 @@ class SessionController extends Controller {
         try {
             $this->dispatchFrom(AttemptUserLogin::class, $request);
             return redirect()->intended($this->config->get('authentication.login.redirectUri'));
-        }
-        catch (LoginFailed $e) {
+        } catch (LoginFailed $e) {
             return redirect()->back()->withInput()->withErrors([
                 'authentication::login_error' => $e->getMessage()
             ]);
-        }
-        catch (UserIsBanned $e) {
+        } catch (UserIsBanned $e) {
             return redirect()->back()->withInput()->withErrors([
                 'authentication::login_error' => $e->getMessage()
             ]);
@@ -83,12 +82,10 @@ class SessionController extends Controller {
         try {
             $this->dispatch(new PerformUserLogout());
             return redirect($this->config->get('authentication.logout.redirectUri'));
-        }
-        catch (SessionHasExpired $e) {
-           return redirect()->route('authentication::session.create')->withErrors([
+        } catch (SessionHasExpired $e) {
+            return redirect()->route('authentication::session.create')->withErrors([
                'authentication::login_warning' => $e->getMessage()
            ]);
         }
     }
-
 }

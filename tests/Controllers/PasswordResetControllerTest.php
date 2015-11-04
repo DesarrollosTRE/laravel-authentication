@@ -7,8 +7,8 @@ use Speelpenning\Authentication\Repositories\PasswordResetRepository;
 use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\User;
 
-class PasswordResetControllerTest extends TestCase {
-
+class PasswordResetControllerTest extends TestCase
+{
     use DispatchesJobs;
 
     /**
@@ -161,5 +161,4 @@ class PasswordResetControllerTest extends TestCase {
             ->seePageIs(route('authentication::password-reset.create'))
             ->see(trans('authentication::password-reset.expired'));
     }
-
 }

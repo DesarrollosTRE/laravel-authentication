@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Session;
 use Speelpenning\Authentication\Jobs\RegisterUser;
 use Speelpenning\Authentication\User;
 
-class SessionControllerTest extends TestCase {
-
+class SessionControllerTest extends TestCase
+{
     use DispatchesJobs;
 
     public function setUp()
@@ -116,5 +116,4 @@ class SessionControllerTest extends TestCase {
             ->press(trans('authentication::session.create'))
             ->see(trans('authentication::user.banned', ['email' => $this->user->email]));
     }
-
 }

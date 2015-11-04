@@ -3,8 +3,8 @@
 use Speelpenning\Authentication\PasswordReset;
 use Speelpenning\Authentication\User;
 
-class PasswordResetTest extends TestCase {
-
+class PasswordResetTest extends TestCase
+{
     protected function generatePasswordReset()
     {
         return PasswordReset::generate(User::register('John Doe', 'john.doe@example.com', 'some-password'));
@@ -39,5 +39,4 @@ class PasswordResetTest extends TestCase {
 
         $this->assertTrue($reset->isExpired());
     }
-
 }

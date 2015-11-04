@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Console\Commands;
+<?php
+
+namespace Speelpenning\Authentication\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Validation\Factory;
@@ -12,8 +14,8 @@ use Speelpenning\Authentication\Jobs\SendPasswordResetLink;
 use Speelpenning\Authentication\Jobs\UnbanUser;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
-class Ban extends Command {
-
+class Ban extends Command
+{
     use DispatchesJobs;
 
     /**
@@ -46,17 +48,14 @@ class Ban extends Command {
             if ($this->option('unban')) {
                 $this->dispatch(new UnbanUser($user->id));
                 $this->info(trans('authentication::user.unbanned', ['email' => $user->email]));
-            }
-            else {
+            } else {
                 $this->dispatch(new BanUser($user->id));
                 $this->info(trans('authentication::user.banned', ['email' => $user->email]));
             }
 
             $users->save($user);
-        }
-        catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
             $this->error('User not found.');
         }
     }
-
 }

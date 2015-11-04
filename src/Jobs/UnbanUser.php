@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Jobs;
+<?php
+
+namespace Speelpenning\Authentication\Jobs;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -6,8 +8,8 @@ use Speelpenning\Authentication\Events\UserWasBanned;
 use Speelpenning\Authentication\Events\UserWasUnbanned;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
-class UnbanUser implements SelfHandling {
-
+class UnbanUser implements SelfHandling
+{
     /**
      * @var int
      */
@@ -40,5 +42,4 @@ class UnbanUser implements SelfHandling {
 
         $event->fire(new UserWasUnbanned($user));
     }
-
 }

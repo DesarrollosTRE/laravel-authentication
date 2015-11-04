@@ -1,12 +1,14 @@
-<?php namespace Speelpenning\Authentication\Repositories;
+<?php
+
+namespace Speelpenning\Authentication\Repositories;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Speelpenning\Authentication\PasswordReset;
 use Speelpenning\Contracts\Authentication\ExpirableToken;
 use Speelpenning\Contracts\Authentication\Repositories\PasswordResetRepository as PasswordResetRepositoryContract;
 
-class PasswordResetRepository implements PasswordResetRepositoryContract {
-
+class PasswordResetRepository implements PasswordResetRepositoryContract
+{
     /**
      * Checks if a certain password reset exists.
      *
@@ -55,5 +57,4 @@ class PasswordResetRepository implements PasswordResetRepositoryContract {
     {
         return PasswordReset::where('email', $email)->delete();
     }
-
 }

@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication;
+<?php
+
+namespace Speelpenning\Authentication;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -7,8 +9,8 @@ use Speelpenning\Contracts\Authentication\CanBeBanned as CanBeBannedContract;
 use Speelpenning\Contracts\Authentication\CanRegister as CanRegisterContract;
 use Speelpenning\Contracts\Authentication\ManagesUsers as ManagesUsersContract;
 
-class User extends Model implements AuthenticatableContract, CanBeBannedContract, CanRegisterContract, ManagesUsersContract {
-
+class User extends Model implements AuthenticatableContract, CanBeBannedContract, CanRegisterContract, ManagesUsersContract
+{
     use Authenticatable, CanBeBanned, CanRegister, ManagesUsers;
 
     /**
@@ -47,5 +49,4 @@ class User extends Model implements AuthenticatableContract, CanBeBannedContract
     protected $casts = [
         'admin' => 'boolean',
     ];
-
 }

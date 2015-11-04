@@ -1,7 +1,9 @@
-<?php namespace Speelpenning\Authentication;
+<?php
 
-trait CanRegister {
+namespace Speelpenning\Authentication;
 
+trait CanRegister
+{
     /**
      * Registers a new user.
      *
@@ -14,5 +16,4 @@ trait CanRegister {
     {
         return new static(compact('name', 'email', 'password'));
     }
-
 }

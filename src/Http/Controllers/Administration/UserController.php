@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Http\Controllers\Administration;
+<?php
+
+namespace Speelpenning\Authentication\Http\Controllers\Administration;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\RedirectResponse;
@@ -11,8 +13,8 @@ use Speelpenning\Authentication\Jobs\BanUser;
 use Speelpenning\Authentication\Jobs\UnbanUser;
 use Speelpenning\Contracts\Authentication\Repositories\UserRepository;
 
-class UserController extends Controller {
-
+class UserController extends Controller
+{
     use DispatchesJobs;
 
     public function __construct()
@@ -72,5 +74,4 @@ class UserController extends Controller {
 
         return redirect()->route('authentication::user.show', $id);
     }
-
 }

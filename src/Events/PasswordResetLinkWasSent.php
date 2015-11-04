@@ -1,10 +1,12 @@
-<?php namespace Speelpenning\Authentication\Events;
+<?php
+
+namespace Speelpenning\Authentication\Events;
 
 use Illuminate\Queue\SerializesModels;
 use Speelpenning\Contracts\Authentication\ExpirableToken;
 
-class PasswordResetLinkWasSent {
-
+class PasswordResetLinkWasSent
+{
     use SerializesModels;
 
     /**
@@ -21,5 +23,4 @@ class PasswordResetLinkWasSent {
     {
         $this->passwordReset = $passwordReset;
     }
-
 }

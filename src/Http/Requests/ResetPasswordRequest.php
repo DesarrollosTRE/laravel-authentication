@@ -1,9 +1,11 @@
-<?php namespace Speelpenning\Authentication\Http\Requests;
+<?php
+
+namespace Speelpenning\Authentication\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResetPasswordRequest extends FormRequest {
-
+class ResetPasswordRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,5 +29,4 @@ class ResetPasswordRequest extends FormRequest {
             'password' => ['required', 'confirmed', 'string', 'min:' . config('authentication.password.minLength')],
         ];
     }
-
 }

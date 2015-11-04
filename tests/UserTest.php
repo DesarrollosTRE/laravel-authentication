@@ -2,8 +2,8 @@
 
 use Speelpenning\Authentication\User;
 
-class UserTest extends TestCase {
-
+class UserTest extends TestCase
+{
     public function testItCanBeRegistered()
     {
         $user = User::register('John Doe', 'john.doe@example.com', 'some-password');
@@ -12,5 +12,4 @@ class UserTest extends TestCase {
         $this->assertEquals('john.doe@example.com', $user->email);
         $this->assertEquals('some-password', $user->password);
     }
-
 }

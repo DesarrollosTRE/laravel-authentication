@@ -3,8 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddBannedAtColumnToUsersTable extends Migration {
-
+class AddBannedAtColumnToUsersTable extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -28,5 +28,4 @@ class AddBannedAtColumnToUsersTable extends Migration {
             $table->dropColumn('banned_at');
         });
     }
-
 }

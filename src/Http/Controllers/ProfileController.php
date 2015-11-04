@@ -1,4 +1,6 @@
-<?php namespace Speelpenning\Authentication\Http\Controllers;
+<?php
+
+namespace Speelpenning\Authentication\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -9,8 +11,8 @@ use Speelpenning\Authentication\Http\Middleware\Authenticate;
 use Speelpenning\Authentication\Http\Requests\UpdateUserRequest;
 use Speelpenning\Authentication\Jobs\UpdateUser;
 
-class ProfileController extends Controller {
-
+class ProfileController extends Controller
+{
     use DispatchesJobs;
 
     /**
@@ -66,5 +68,4 @@ class ProfileController extends Controller {
 
         return redirect()->route('authentication::profile.show');
     }
-
 }

@@ -3,8 +3,8 @@
 use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\User;
 
-class UserRepositoryTest extends TestCase {
-
+class UserRepositoryTest extends TestCase
+{
     /**
      * @var UserRepository
      */
@@ -56,5 +56,4 @@ class UserRepositoryTest extends TestCase {
         
         $this->assertInstanceOf(User::class, $this->repository->findByEmailAddress($this->user->email));
     }
-
 }

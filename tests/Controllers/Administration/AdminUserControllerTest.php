@@ -5,8 +5,8 @@ use Speelpenning\Authentication\Jobs\RegisterUser;
 use Speelpenning\Authentication\Repositories\UserRepository;
 use Speelpenning\Authentication\User;
 
-class AdminUserControllerTest extends TestCase {
-
+class AdminUserControllerTest extends TestCase
+{
     use DispatchesJobs;
 
     /**

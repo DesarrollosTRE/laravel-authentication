@@ -1,9 +1,11 @@
-<?php namespace Speelpenning\Authentication\Http\Requests;
+<?php
+
+namespace Speelpenning\Authentication\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends FormRequest {
-
+class CreateUserRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,5 +34,4 @@ class CreateUserRequest extends FormRequest {
     {
         return [];
     }
-
 }

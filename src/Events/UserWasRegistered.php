@@ -1,10 +1,12 @@
-<?php namespace Speelpenning\Authentication\Events;
+<?php
+
+namespace Speelpenning\Authentication\Events;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Queue\SerializesModels;
 
-class UserWasRegistered {
-
+class UserWasRegistered
+{
     use SerializesModels;
 
     /**
@@ -21,5 +23,4 @@ class UserWasRegistered {
     {
         $this->user = $user;
     }
-
 }

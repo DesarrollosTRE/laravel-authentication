@@ -1,7 +1,9 @@
-<?php namespace Speelpenning\Authentication;
+<?php
 
-trait ManagesUsers {
+namespace Speelpenning\Authentication;
 
+trait ManagesUsers
+{
     /**
      * Indicates if managing users is allowed.
      *
@@ -21,5 +23,4 @@ trait ManagesUsers {
     {
         return 'admin';
     }
-
 }
