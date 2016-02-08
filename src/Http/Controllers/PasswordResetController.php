@@ -35,7 +35,7 @@ class PasswordResetController extends Controller
      */
     public function store(SendPasswordResetLinkRequest $request)
     {
-        $this->dispatchFrom(SendPasswordResetLink::class, $request);
+        $this->dispatch(new SendPasswordResetLink($request->get('email')));
 
         return redirect()->route('authentication::password-reset.create')->withErrors([
             'authentication::password-reset.created' => trans('authentication::password-reset.created'),
@@ -69,7 +69,7 @@ class PasswordResetController extends Controller
     public function update(ResetPasswordRequest $request)
     {
         try {
-            $this->dispatchFrom(ResetPassword::class, $request);
+            $this->dispatch(new ResetPassword($request->get('token'), $request->get('email'), $request->get('password')));
 
             return redirect()->route('authentication::session.create')->withErrors([
                 'authentication::password-reset.updated' => trans('authentication::password-reset.updated'),

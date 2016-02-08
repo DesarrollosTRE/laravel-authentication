@@ -57,8 +57,7 @@ class UserController extends Controller
      */
     public function ban($id)
     {
-        $this->dispatchFromArray(BanUser::class, compact('id'));
-
+        $this->dispatch(new BanUser($id));
         return redirect()->route('authentication::user.show', $id);
     }
 
@@ -70,8 +69,7 @@ class UserController extends Controller
      */
     public function unban($id)
     {
-        $this->dispatchFromArray(UnbanUser::class, compact('id'));
-
+        $this->dispatch(new UnbanUser($id));
         return redirect()->route('authentication::user.show', $id);
     }
 }

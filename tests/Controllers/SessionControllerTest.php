@@ -10,6 +10,11 @@ class SessionControllerTest extends TestCase
 {
     use DispatchesJobs;
 
+    /**
+     * @var User
+     */
+    protected $user;
+
     public function setUp()
     {
         parent::setUp();
@@ -17,8 +22,7 @@ class SessionControllerTest extends TestCase
         $this->artisan('migrate:refresh');
 
         $this->user = User::register('John Doe', 'john.doe@example.com', 'some-password');
-
-        $this->dispatchFrom(RegisterUser::class, $this->user);
+        $this->dispatch(new RegisterUser($this->user->name, $this->user->email, $this->user->password));
     }
 
     public function testDefaultLoginPage()

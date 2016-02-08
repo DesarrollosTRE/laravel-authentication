@@ -4,7 +4,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Facades\Artisan;
 use Speelpenning\Authentication\Jobs\RegisterUser;
 use Speelpenning\Authentication\Repositories\UserRepository;
-use Speelpenning\Authentication\User;
 
 class AdminTest extends TestCase
 {
@@ -17,7 +16,7 @@ class AdminTest extends TestCase
         $this->artisan('vendor:publish');
         $this->artisan('migrate:refresh');
 
-        $this->dispatchFrom(RegisterUser::class, User::register('John Doe', 'john.doe@example.com', 'some-password'));
+        $this->dispatch(new RegisterUser('John Doe', 'john.doe@example.com', 'some-password'));
         $this->user = app(UserRepository::class)->findByEmailAddress('john.doe@example.com');
     }
 

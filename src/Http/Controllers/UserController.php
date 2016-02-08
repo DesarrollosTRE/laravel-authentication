@@ -35,7 +35,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request, Repository $config)
     {
-        $this->dispatchFrom(RegisterUser::class, $request);
+        $this->dispatch(new RegisterUser($request->get('name'), $request->get('email'), $request->get('password')));
 
         return redirect($config->get('authentication.registration.redirectUri'));
     }

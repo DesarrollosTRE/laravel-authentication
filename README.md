@@ -1,4 +1,4 @@
-# Authentication for Laravel 5.1
+# Authentication for Laravel 5.2
 
 [![Build Status](https://travis-ci.org/Speelpenning-nl/laravel-authentication.svg)](https://travis-ci.org/Speelpenning-nl/laravel-authentication)
 [![codecov.io](http://codecov.io/github/Speelpenning-nl/laravel-authentication/coverage.svg?branch=master)](http://codecov.io/github/Speelpenning-nl/laravel-authentication?branch=master)
@@ -231,4 +231,4 @@ Default value: authentication::password-reset.subject
 ```ini
 AUTH_PASSWORD_RESET_EXPIRES_AFTER=<minutes>
 ```
-Default value: config('auth.password.expire')
+Default value: config('auth.passwords.users.expire')

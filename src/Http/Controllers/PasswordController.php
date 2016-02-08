@@ -43,10 +43,8 @@ class PasswordController extends Controller
      */
     public function update(ChangePasswordRequest $request, Guard $auth)
     {
-        $request->merge(['id' => $auth->user()->id]);
-
         try {
-            $this->dispatchFrom(ChangePassword::class, $request);
+            $this->dispatch(new ChangePassword($auth->user()->id, $request->get('current_password'), $request->get('new_password')));
             return redirect()->route('authentication::profile.show');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());

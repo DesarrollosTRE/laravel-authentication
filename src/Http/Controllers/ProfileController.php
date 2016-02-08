@@ -62,10 +62,7 @@ class ProfileController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
-        $request->merge(['id' => $this->auth->user()->id]);
-
-        $this->dispatchFrom(UpdateUser::class, $request);
-
+        $this->dispatch(new UpdateUser($this->auth->user()->id, $request->get('name'), $request->get('email')));
         return redirect()->route('authentication::profile.show');
     }
 }
