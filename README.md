@@ -17,6 +17,8 @@ This package is made to quick start a highly configurable authentication for you
 
 ### Installation
 
+For Laravel 5.1, please use v0.2.4.
+
 Pull in the package by Composer:
 ```bash
 composer require speelpenning/laravel-authentication

@@ -38,7 +38,8 @@ abstract class TestCase extends LaravelTestCase
             'authentication.enableRoutes' => true,
             'database.default' => 'sqlite',
             'database.connections.sqlite.database' => ':memory:',
-            'mail.pretend' => true,
+            'mail.from.address' => 'john.doe@example.com',
+            'mail.from.name' => 'John Doe',
         ]);
     }
 }
