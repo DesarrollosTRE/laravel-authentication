@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['as' => 'authentication::'], function () {
+Route::group(['as' => 'authentication::', 'middleware' => ['web']], function () {
 
     /*
      * Registration routes

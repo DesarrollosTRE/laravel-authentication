@@ -21,9 +21,9 @@ class AdminUserControllerTest extends TestCase
         $this->artisan('vendor:publish');
         $this->artisan('migrate:refresh');
 
-        $this->dispatchFrom(RegisterUser::class, User::register('John Doe', 'john.doe@example.com', 'some-password'));
-        $this->dispatchFrom(RegisterUser::class, User::register('John Doe Sr.', 'john.doe.sr@example.com', 'some-password'));
-        $this->dispatchFrom(RegisterUser::class, User::register('Another User', 'another.user@example.com', 'some-password'));
+        $this->dispatch(new RegisterUser('John Doe', 'john.doe@example.com', 'some-password'));
+        $this->dispatch(new RegisterUser('John Doe Sr.', 'john.doe.sr@example.com', 'some-password'));
+        $this->dispatch(new RegisterUser('Another User', 'another.user@example.com', 'some-password'));
 
         $this->artisan('user:admin', ['email' => 'john.doe@example.com']);
 

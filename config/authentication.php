@@ -145,7 +145,7 @@ return [
         /*
          * Expire time (in minutes)
          */
-        'expiresAfter' => env('AUTH_PASSWORD_RESET_EXPIRES_AFTER', config('auth.password.expire')),
+        'expiresAfter' => env('AUTH_PASSWORD_RESET_EXPIRES_AFTER', config('auth.passwords.users.expire')),
 
     ],
 

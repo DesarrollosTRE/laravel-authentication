@@ -1,6 +1,6 @@
 {
     "name": "speelpenning/laravel-authentication",
-    "description": "Fully configurable authentication for Laravel 5.1.",
+    "description": "Fully configurable authentication for Laravel 5.2.",
     "license": "MIT",
     "authors": [
         {
@@ -10,11 +10,13 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.1.*",
+        "laravel/framework": "5.2.*",
         "speelpenning/contracts": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0"
+        "phpunit/phpunit": "~4.0",
+        "symfony/dom-crawler": "~3.0",
+        "symfony/css-selector": "~3.0"
     },
     "autoload": {
         "psr-4": {

@@ -59,7 +59,7 @@ class SessionController extends Controller
     public function store(Request $request)
     {
         try {
-            $this->dispatchFrom(AttemptUserLogin::class, $request);
+            $this->dispatch(new AttemptUserLogin($request->get('email'), $request->get('password'), $request->get('remember')));
             return redirect()->intended($this->config->get('authentication.login.redirectUri'));
         } catch (LoginFailed $e) {
             return redirect()->back()->withInput()->withErrors([

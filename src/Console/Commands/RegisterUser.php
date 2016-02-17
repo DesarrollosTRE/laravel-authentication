@@ -8,6 +8,7 @@ use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Support\Str;
 use Speelpenning\Authentication\Http\Requests\StoreUserRequest;
+use Speelpenning\Authentication\Jobs\RegisterUser as RegisterUserJob;
 use Speelpenning\Authentication\Jobs\SendPasswordResetLink;
 
 class RegisterUser extends Command
@@ -102,7 +103,9 @@ class RegisterUser extends Command
      */
     protected function registerUser(array $input)
     {
-        $this->dispatchFromArray(\Speelpenning\Authentication\Jobs\RegisterUser::class, $input);
+        $this->dispatch(new RegisterUserJob(array_get($input, 'name'),
+                                            array_get($input, 'email'),
+                                            array_get($input, 'password')));
         $this->info(trans('authentication::user.console.created', $input));
     }
 
@@ -114,7 +117,7 @@ class RegisterUser extends Command
     protected function sendResetPasswordLink(array $input)
     {
         if ($this->option('with-reset')) {
-            $this->dispatchFromArray(SendPasswordResetLink::class, $input);
+            $this->dispatch(new SendPasswordResetLink(array_get($input, 'email')));
             $this->info(trans('authentication::password-reset.console.created'));
         }
     }

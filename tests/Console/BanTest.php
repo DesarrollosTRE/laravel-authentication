@@ -17,7 +17,7 @@ class BanTest extends TestCase
         $this->artisan('vendor:publish');
         $this->artisan('migrate:refresh');
 
-        $this->dispatchFrom(RegisterUser::class, User::register('John Doe', 'john.doe@example.com', 'some-password'));
+        $this->dispatch(new RegisterUser('John Doe', 'john.doe@example.com', 'some-password'));
         $this->user = app(UserRepository::class)->findByEmailAddress('john.doe@example.com');
     }
 

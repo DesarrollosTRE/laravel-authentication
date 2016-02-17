@@ -1,4 +1,4 @@
-# Authentication for Laravel 5.1
+# Authentication for Laravel 5.2
 
 [![Build Status](https://travis-ci.org/Speelpenning-nl/laravel-authentication.svg)](https://travis-ci.org/Speelpenning-nl/laravel-authentication)
 [![codecov.io](http://codecov.io/github/Speelpenning-nl/laravel-authentication/coverage.svg?branch=master)](http://codecov.io/github/Speelpenning-nl/laravel-authentication?branch=master)
@@ -16,6 +16,8 @@ This package is made to quick start a highly configurable authentication for you
 ## Getting started
 
 ### Installation
+
+For Laravel 5.1, please use v0.2.4.
 
 Pull in the package by Composer:
 ```bash
@@ -38,7 +40,12 @@ There are two options for implementation: using the model that comes with the pa
 
 For just using the package's model, change the model entry in auth.php like so:
 ```php
-'model' => Speelpenning\Authentication\User::class,
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => Speelpenning\Authentication\User::class,
+    ],
+],
 ```
 
 Extending can be done like so:
@@ -231,4 +238,4 @@ Default value: authentication::password-reset.subject
 ```ini
 AUTH_PASSWORD_RESET_EXPIRES_AFTER=<minutes>
 ```
-Default value: config('auth.password.expire')
+Default value: config('auth.passwords.users.expire')
