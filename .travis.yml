@@ -8,6 +8,7 @@ php:
 matrix:
   allow_failures:
     - php: 7.0
+    - php: hhvm
 
 before_script:
   - composer require --dev "laravel/laravel=5.2.*"
