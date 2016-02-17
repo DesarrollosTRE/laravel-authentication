@@ -40,7 +40,12 @@ There are two options for implementation: using the model that comes with the pa
 
 For just using the package's model, change the model entry in auth.php like so:
 ```php
-'model' => Speelpenning\Authentication\User::class,
+'providers' => [
+    'users' => [
+        'driver' => 'eloquent',
+        'model' => Speelpenning\Authentication\User::class,
+    ],
+],
 ```
 
 Extending can be done like so:
