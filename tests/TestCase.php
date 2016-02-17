@@ -34,7 +34,7 @@ abstract class TestCase extends LaravelTestCase
     protected function configureLaravel()
     {
         config([
-            'auth.model' => User::class,
+            'auth.providers.users.model' => User::class,
             'authentication.enableRoutes' => true,
             'database.default' => 'sqlite',
             'database.connections.sqlite.database' => ':memory:',
